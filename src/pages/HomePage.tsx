@@ -3,6 +3,7 @@ import type { Language } from '../content'
 import Activities from '../components/Activities'
 import Projects from '../components/Projects'
 import News from '../components/News'
+import Achievements from '../components/Achievements'
 
 function HomePage({ language }: { language: Language }) {
   return (
@@ -11,6 +12,7 @@ function HomePage({ language }: { language: Language }) {
       <Activities language={language} />
       <Projects language={language} />
       <News language={language} />
+      <Achievements language={language} />
     </>
   )
 }
