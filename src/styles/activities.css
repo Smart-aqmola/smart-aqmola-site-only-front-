@@ -1,0 +1,136 @@
+﻿.activities {
+  padding-block: 22px 24px;
+  background: #fff;
+  border-bottom: 1px solid #edf1f6;
+}
+
+.activities .activities-container {
+  max-width: 1440px;
+  padding-inline: clamp(20px, 3.2vw, 46px);
+}
+
+.activities-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-bottom: 16px;
+}
+
+.activities-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  margin-left: auto;
+  color: #1777cf;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.activities-all:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.activities-title {
+  max-width: 320px;
+  margin: 0;
+  color: #14345b;
+  font-size: clamp(18px, 1.8vw, 25px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -.3px;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: clamp(12px, 1.4vw, 20px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.activity-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-height: 166px;
+  padding: 12px 16px 16px;
+  border-radius: 7px;
+  background: #f3f8fe;
+  text-align: center;
+  transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+
+@media (hover: hover) {
+  .activity-card:hover {
+    transform: translateY(-3px);
+    background: #edf5ff;
+    box-shadow: 0 6px 18px rgba(24, 93, 156, .08);
+  }
+}
+
+.activity-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d9eaff, #e9f5ff);
+  color: #167cec;
+}
+
+.activity-icon svg { width: 40px; height: 40px; }
+
+.activity-title {
+  max-width: 180px;
+  margin: 0;
+  color: #152e4f;
+  font-size: clamp(12px, 1.15vw, 15px);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+@media (max-width: 1150px) and (min-width: 901px) {
+  .activities { padding-block: 18px; }
+  .activities-title { max-width: 260px; }
+  .activities-heading { margin-bottom: 14px; }
+  .activity-card { min-height: 132px; padding: 8px 12px 12px; gap: 10px; }
+  .activity-icon { width: 48px; height: 48px; }
+  .activity-icon svg { width: 34px; height: 34px; }
+}
+
+@media (max-width: 900px) {
+  .activities-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .activities-title { max-width: none; }
+  .activity-card { min-height: 154px; }
+  .activity-title { font-size: 14px; }
+}
+
+@media (max-width: 600px) {
+  .activities { padding-block: 24px; }
+  .activities-title { max-width: 280px; font-size: 21px; }
+  .activities-heading { margin-bottom: 18px; }
+  .activities-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .activity-card { padding: 14px 12px; }
+  .activity-icon { width: 52px; height: 52px; }
+  .activity-icon svg { width: 36px; height: 36px; }
+  .activity-title { font-size: 13px; }
+}
+
+@media (max-width: 380px) {
+  .activities-grid { grid-template-columns: 1fr; }
+  .activity-card { min-height: 148px; }
+  .activity-title { max-width: 240px; font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .activity-card { transition: none; }
+  .activity-card:hover { transform: none; }
+}

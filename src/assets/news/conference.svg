@@ -1,0 +1,8 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220">
+<defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#e5edf1"/><stop offset="1" stop-color="#b7cad8"/></linearGradient></defs><path fill="url(#bg)" d="M0 0h360v220H0z"/><path d="M0 168h360v52H0Z" fill="#8f9eac"/>
+<rect x="46" y="20" width="268" height="72" fill="#fff" stroke="#c0d3e0"/><path d="M73 44h214M100 57h160M128 70h104" stroke="#3487be" stroke-width="4"/>
+<g fill="#254664"><path d="M37 201v-58q14-20 28 0v58M87 201v-58q14-20 28 0v58M137 201v-58q14-20 28 0v58M237 201v-58q14-20 28 0v58M287 201v-58q14-20 28 0v58"/></g>
+<path d="M184 201v-56q17-23 34 0v56Z" fill="#496f8d"/>
+<g fill="#d7b99f"><circle cx="51" cy="119" r="12"/><circle cx="101" cy="119" r="12"/><circle cx="151" cy="119" r="12"/><circle cx="201" cy="119" r="12"/><circle cx="251" cy="119" r="12"/><circle cx="301" cy="119" r="12"/></g>
+<g fill="#f0f5f8"><path d="m45 141 6 21 6-21M95 141l6 21 6-21M145 141l6 21 6-21M245 141l6 21 6-21M295 141l6 21 6-21"/></g>
+</svg>

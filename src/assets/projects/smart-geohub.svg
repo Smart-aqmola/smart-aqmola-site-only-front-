@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#082b41"/><stop offset="1" stop-color="#1d7286"/></linearGradient></defs><path fill="url(#bg)" d="M0 0h480v260H0z"/>
+<g stroke="#9eeaff" stroke-width="1.5" stroke-linejoin="round"><path d="m235 153 107-64 108 57-108 69Z" fill="#208ed4"/><path d="m235 128 107-64 108 57-108 69Z" fill="#37a9b5"/><path d="m235 103 107-64 108 57-108 69Z" fill="#438763"/><path d="m250 104 48-12 30 17 47-24 50 21M342 42v120m-80-44 96-66" fill="none"/></g>
+<g fill="#91efff"><circle cx="328" cy="109" r="5"/><circle cx="375" cy="85" r="5"/></g>
+<text x="25" y="115" fill="#fff" font-family="Arial,sans-serif" font-size="28" font-weight="700">Smart</text><text x="25" y="151" fill="#d5f6ff" font-family="Arial,sans-serif" font-size="28">GeoHub</text>
+</svg>

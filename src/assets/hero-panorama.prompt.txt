@@ -1,0 +1,5 @@
+﻿Tool: built-in image_gen.imagegen
+Reference: reference/aqmola-reference.jpeg
+Output: src/assets/hero-panorama.png
+
+Create a standalone website hero BACKGROUND asset based only on the panoramic hero strip in this reference (the strip immediately below the navy navigation). Output a wide 3:1 landscape raster image. Full bleed photorealistic Kazakhstan city panorama: broad blue lake/river foreground, green landscaped waterfront, white modern civic buildings, slender white observation tower with a golden spherical top near center, low mountains in distance, blue sky. Match the reference panorama composition and blue daylight palette very closely. Left 42 percent softly blended into medium deep royal blue for readable HTML text. Right 60 percent visible detailed panorama. Remove ALL UI, all text, headings, buttons, logos, the glowing map, dots, arrows, header and all lower sections. Only the scenic background, no typography, no map overlay. This is an illustrative placeholder inspired by the reference, not a verified documentary image.

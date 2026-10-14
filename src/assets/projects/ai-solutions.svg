@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260">
+<defs><radialGradient id="bg"><stop stop-color="#056ab0"/><stop offset="1" stop-color="#021b38"/></radialGradient><filter id="glow"><feGaussianBlur stdDeviation="7"/></filter></defs><path fill="url(#bg)" d="M0 0h480v260H0z"/>
+<g stroke="#18b8fb" stroke-width="2" fill="none"><path d="M190 95h-70l-25-35H30m160 60H75l-30 30H0m190 20h-55l-35 55H35M290 95h70l25-35h65m-160 60h115l30 30h45m-190 20h55l35 55h65M215 80V35l-40-30m65 75V0m25 80V35l40-30M215 180v45l-30 35m55-80v80m25-80v45l30 35"/></g>
+<rect x="177" y="67" width="126" height="126" rx="18" fill="#00aaff" opacity=".5" filter="url(#glow)"/><rect x="187" y="77" width="106" height="106" rx="12" fill="#095192" stroke="#6cddff" stroke-width="3"/><rect x="199" y="89" width="82" height="82" rx="6" fill="#0874ba"/>
+<text x="240" y="148" fill="white" text-anchor="middle" font-family="Arial,sans-serif" font-size="52" font-weight="700">AI</text>
+</svg>

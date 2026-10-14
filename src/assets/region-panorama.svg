@@ -1,0 +1,20 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800">
+  <!-- Временная иллюстрация панорамы, не фотография реального города. -->
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#1b5d86"/><stop offset="1" stop-color="#90bfd4"/></linearGradient>
+    <linearGradient id="land" x2="0" y2="1"><stop stop-color="#285e78"/><stop offset="1" stop-color="#082d46"/></linearGradient>
+    <pattern id="windows" width="18" height="22" patternUnits="userSpaceOnUse"><rect x="5" y="5" width="5" height="9" fill="#9ddcff" opacity=".4"/></pattern>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1600v800H0z"/>
+  <circle cx="1160" cy="200" r="130" fill="#c0edff" opacity=".08"/>
+  <path d="M0 440 140 410 240 460 390 360 540 438 670 400 810 454 960 378 1090 435 1240 365 1420 425 1600 350v450H0Z" fill="#447b95"/>
+  <path d="M0 540 230 490 420 530 680 465 830 535 1120 455 1390 520 1600 480v320H0Z" fill="url(#land)"/>
+  <g fill="#1a4863" stroke="#8dcced" stroke-opacity=".2">
+    <path d="M660 650V495h80v155M770 650V455h70v195M860 650V515h85v135M970 650V420h80v230M1090 650V475h110v175M1230 650V385h65v265M1320 650V480h100v170M1450 650V440h95v210"/>
+    <path d="M990 420v-55h40v55M1250 385v-70h20v70"/>
+  </g>
+  <path d="M660 650V495h80v155M770 650V455h70v195M860 650V515h85v135M970 650V420h80v230M1090 650V475h110v175M1230 650V385h65v265M1320 650V480h100v170M1450 650V440h95v210" fill="url(#windows)"/>
+  <path d="M0 690q350-100 650 0t950-30v140H0Z" fill="#113e58"/>
+  <path d="M700 800q300-180 900-120" fill="none" stroke="#72c9ee" stroke-width="3" opacity=".3"/>
+  <path d="M820 800q300-130 780-100" fill="none" stroke="#72c9ee" opacity=".2"/>
+</svg>
