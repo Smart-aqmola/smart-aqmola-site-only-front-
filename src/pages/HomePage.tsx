@@ -4,6 +4,9 @@ import Activities from '../components/Activities'
 import Projects from '../components/Projects'
 import News from '../components/News'
 import Achievements from '../components/Achievements'
+import Vacancies from '../components/Vacancies'
+import Events from '../components/Events'
+import DigitalServices from '../components/DigitalServices'
 
 function HomePage({ language }: { language: Language }) {
   return (
@@ -13,6 +16,9 @@ function HomePage({ language }: { language: Language }) {
       <Projects language={language} />
       <News language={language} />
       <Achievements language={language} />
+      <Vacancies language={language} />
+      <Events language={language} />
+      <DigitalServices language={language} />
     </>
   )
 }
