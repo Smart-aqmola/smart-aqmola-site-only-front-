@@ -1,0 +1,31 @@
+.site-footer { padding-top: 40px; border-top: 1px solid #ffffff24; background: #0c2543; color: #fff; }
+.site-footer .footer-container { max-width: 1440px; padding-inline: clamp(20px, 3.2vw, 46px); }
+.footer-columns { display: grid; grid-template-columns: 1.25fr .85fr 1fr 1fr; gap: 32px; padding-bottom: 32px; }
+.footer-columns > * { min-width: 0; }
+.footer-brand-name { display: inline-block; margin-bottom: 14px; font-size: 24px; font-weight: 750; line-height: 1.3; text-decoration: none; }
+.footer-brand p { max-width: 320px; color: #d1e3f2; font-size: 14px; line-height: 1.7; }
+.footer-columns h2 { margin: 0 0 16px; font-size: 16px; line-height: 1.4; font-weight: 650; }
+.footer-links ul, .footer-social ul { margin: 0; padding: 0; list-style: none; }
+.footer-links a { display: inline-flex; align-items: center; min-height: 36px; color: #d1e3f2; font-size: 14px; text-decoration: none; }
+.footer-links a:hover, .footer-brand-name:hover { color: #8de0ff; text-decoration: underline; text-underline-offset: 4px; }
+.site-footer .footer-notice { color: #afc7dd; font-size: 12px; line-height: 1.6; }
+.footer-contacts > .footer-notice { margin-bottom: 16px; }
+.footer-contacts address { font-style: normal; }
+.footer-contacts dl { margin: 0; font-size: 14px; line-height: 1.6; }
+.footer-contacts dl > div + div { margin-top: 12px; }
+.footer-contacts dt { margin-bottom: 2px; color: #afc7dd; font-size: 12px; }
+.footer-contacts dd { margin: 0; color: #d1e3f2; }
+.footer-social ul { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+.footer-social li { display: flex; align-items: center; gap: 10px; color: #d1e3f2; font-size: 14px; line-height: 1.5; }
+.footer-social svg { flex: 0 0 36px; width: 36px; height: 36px; padding: 7px; border: 1px solid #ffffff30; border-radius: 8px; background: #ffffff09; color: #8de0ff; }
+.footer-bottom { padding-block: 20px; border-top: 1px solid #ffffff24; color: #afc7dd; font-size: 13px; line-height: 1.6; }
+
+@media (max-width: 1000px) {
+  .footer-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 32px; }
+}
+
+@media (max-width: 600px) {
+  .site-footer { padding-top: 32px; }
+  .footer-columns { grid-template-columns: 1fr; gap: 28px; padding-bottom: 28px; }
+  .footer-brand p { max-width: none; }
+}

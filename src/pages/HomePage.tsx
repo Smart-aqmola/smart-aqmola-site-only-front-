@@ -7,6 +7,7 @@ import Achievements from '../components/Achievements'
 import Vacancies from '../components/Vacancies'
 import Events from '../components/Events'
 import DigitalServices from '../components/DigitalServices'
+import Footer from '../components/Footer'
 
 function HomePage({ language }: { language: Language }) {
   return (
@@ -19,6 +20,7 @@ function HomePage({ language }: { language: Language }) {
       <Vacancies language={language} />
       <Events language={language} />
       <DigitalServices language={language} />
+      <Footer language={language} />
     </>
   )
 }
