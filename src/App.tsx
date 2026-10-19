@@ -1,6 +1,8 @@
 ﻿import { useEffect, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
+import ProjectsPage from './pages/ProjectsPage'
 import type { Language } from './content'
 
 function App() {
@@ -12,7 +14,10 @@ function App() {
 
   return (
     <Layout language={language} onLanguageChange={setLanguage}>
-      <HomePage language={language} />
+      <Routes>
+        <Route path="/" element={<HomePage language={language} />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+      </Routes>
     </Layout>
   )
 }

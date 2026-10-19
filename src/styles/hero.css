@@ -1,14 +1,18 @@
 ﻿.hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; background: #07568b; }
-.hero::before {
-  content: '';
+.hero-slides {
   position: absolute;
   z-index: -2;
   inset: 0;
-  background-image: url('/images/kokshetau-panorama.jpeg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  pointer-events: none;
 }
+.hero-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0; transition: opacity 1s ease-in-out; }
+.hero-slide.is-active { opacity: 1; }
+.hero-indicators { position: relative; display: flex; justify-content: center; gap: 4px; padding: 0 20px 16px; }
+.hero-indicator { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #fff; cursor: pointer; }
+.hero-indicator span { width: 8px; height: 8px; border: 1px solid #ffffffb0; border-radius: 50%; background: #ffffff40; transition: background-color .2s ease, transform .2s ease; }
+.hero-indicator:hover span { background: #ffffffa0; }
+.hero-indicator.is-active span { background: #fff; transform: scale(1.3); }
+.hero-indicator:focus-visible { outline: 2px solid #8de0ff; outline-offset: 1px; }
 .hero::after {
   content: '';
   position: absolute;
@@ -30,12 +34,9 @@
 .hero .button-secondary { background: #ffffff04; border: 1px solid #d2ebffb0; }
 .hero .button-secondary:hover { background: #ffffff18; border-color: #fff; }
 .hero .button span { font-size: 18px; line-height: 1; }
-.region-visual { position: relative; width: 100%; height: 290px; align-self: center; }
-.region-map { position: absolute; width: 78%; height: 120%; left: 0; top: -10%; filter: drop-shadow(0 0 9px #20baff); }
-.map-shape { fill: url('#map-fill'); stroke: #d3f4ff; stroke-width: 2.3; stroke-linejoin: round; }
-.map-connections { fill: none; stroke: #5cd9ff; stroke-width: 1; opacity: .9; }
-.map-crosshairs { display: none; }
-.region-caption { position: absolute; top: 7%; right: 0; width: 30%; padding-left: 18px; border-left: 1px solid #d6edffb0; font-size: 16px; line-height: 1.4; color: #d0ecff; }
+.region-visual { display: grid; grid-template-columns: minmax(0, 1fr) 130px; align-items: center; gap: 12px; width: 100%; align-self: center; }
+.region-map { width: 500px; max-width: 100%; height: auto; object-fit: contain; }
+.region-caption { padding-left: 16px; border-left: 1px solid #d6edffb0; font-size: 16px; line-height: 1.4; color: #d0ecff; }
 .hero-bottom-line { display: none; }
 @media (max-width: 1150px) and (min-width: 801px) {
   .hero-content { padding-block: 30px; }
@@ -43,7 +44,7 @@
   .hero-description { max-width: 355px; }
   .hero-actions { margin-top: 20px; gap: 12px; }
   .hero .button { min-height: 36px; min-width: 142px; border-radius: 12px; font-size: 10px; padding: 8px 20px; }
-  .region-visual { height: 225px; }
+  .region-visual { grid-template-columns: minmax(0, 1fr) 100px; gap: 8px; }
   .region-caption { font-size: 12px; padding-left: 14px; }
 }
 @media (max-width: 800px) {
@@ -51,7 +52,7 @@
   .hero-copy { max-width: 550px; }
   .hero h1 { font-size: clamp(30px, 5.2vw, 42px); }
   .hero-description { font-size: 14px; max-width: 470px; }
-  .region-visual { max-width: 520px; width: 100%; height: 240px; justify-self: end; }
+  .region-visual { max-width: 620px; width: 100%; justify-self: end; }
   .region-caption { font-size: 13px; }
   .hero::after { background: linear-gradient(180deg, rgba(5, 30, 65, .82), rgba(5, 30, 65, .5)); }
 }
@@ -60,8 +61,9 @@
   .hero h1 span { font-size: 22px; line-height: 1.25; }
   .hero-actions { gap: 10px; margin-top: 22px; }
   .hero .button { min-width: 0; padding: 11px 16px; font-size: 11px; flex: 1; border-radius: 12px; }
-  .region-visual { height: 205px; }
-  .region-map { width: 80%; left: -4%; }
-  .region-caption { width: 32%; font-size: 11px; padding-left: 10px; top: 15%; }
+  .region-visual { grid-template-columns: minmax(0, 1fr) 90px; gap: 8px; }
+  .region-caption { font-size: 11px; padding-left: 10px; }
 }
-@media (prefers-reduced-motion: reduce) { .hero .button { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero .button, .hero-slide, .hero-indicator span { transition: none; }
+}
