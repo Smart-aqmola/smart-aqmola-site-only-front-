@@ -12,8 +12,8 @@ function Projects({ language }: { language: Language }) {
         <div className="projects-heading">
           <h2 id="projects-title">{text.title}</h2>
           <Link className="projects-all" to="/projects">
-          {text.all} <span aria-hidden="true">→</span>
-          </Link>
+          {text.all} <span aria-hidden="true"></span>
+          </Link> 
         </div>
         <ul className="projects-grid">
           {projects.map((project) => {
