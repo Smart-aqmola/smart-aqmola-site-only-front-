@@ -1,4 +1,5 @@
-﻿import type { Language } from '../content'
+﻿import {Link} from 'react-router-dom'
+import type { Language } from '../content'
 import { projects, projectsContent } from '../data/projects'
 import '../styles/projects.css'
 
@@ -10,7 +11,9 @@ function Projects({ language }: { language: Language }) {
       <div className="container projects-container">
         <div className="projects-heading">
           <h2 id="projects-title">{text.title}</h2>
-          <a className="projects-all" href="/projects">{text.all} <span aria-hidden="true">→</span></a>
+          <Link className="projects-all" to="/projects">
+          {text.all} <span aria-hidden="true">→</span>
+          </Link>
         </div>
         <ul className="projects-grid">
           {projects.map((project) => {

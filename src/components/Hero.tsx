@@ -1,4 +1,5 @@
-﻿import { content, type Language } from '../content'
+﻿import { Link } from 'react-router-dom'
+import { content, type Language } from '../content'
 import '../styles/hero.css'
 import { useEffect, useState } from 'react'
 
@@ -37,7 +38,7 @@ function Hero({ language }: HeroProps) {
           <h1 id="hero-title">SMART AQMOLA<span>{language === 'RU' ? 'Цифровое будущее региона' : text.accent}</span></h1>
           <p className="hero-description">{text.description}</p>
           <div className="hero-actions">
-            <a className="button button-primary" href="/projects">{text.projects}<span aria-hidden="true">→</span></a>
+            <Link className="button button-primary" to="/projects">{text.projects}<span aria-hidden="true">→</span></Link>
             <a className="button button-secondary" href="/about">{text.about}</a>
           </div>
         </div>
