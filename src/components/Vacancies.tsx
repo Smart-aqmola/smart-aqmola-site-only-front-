@@ -1,4 +1,4 @@
-
+import type { Language } from '../content'
 import { vacancies, vacanciesContent } from '../data/vacancies'
 import '../styles/vacancies.css'
 
