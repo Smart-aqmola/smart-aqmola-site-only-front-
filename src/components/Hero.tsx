@@ -5,7 +5,14 @@ import { useEffect, useState } from 'react'
 
 type HeroProps = { language: Language }
 
-const heroImages = Array.from({ length: 7 }, (_, index) => `/images/kokshetau-${index + 1}.jpg`)
+const heroImages = [
+  '/images/kokshetau-1.jpg',
+  '/images/kokshetau-3.jpg',
+  '/images/kokshetau-4.jpg',
+  '/images/kokshetau-5.jpg',
+  '/images/kokshetau-6.jpg',
+  '/images/kokshetau-7.jpg',
+]
 const slideshowLabels = {
   RU: { group: 'Фоновые изображения', slide: 'Показать слайд' },
   KZ: { group: 'Фондық суреттер', slide: 'Слайдты көрсету' },

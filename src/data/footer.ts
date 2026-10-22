@@ -9,7 +9,7 @@ type FooterContent = {
 // Временные нейтральные контакты для макета. Заменить подтверждёнными перед запуском.
 // Демонстрационный email не является рабочим, телефон и адрес пока не предоставлены.
 export const footerContacts = {
-  email: 'info@example.com',
+  email: 'smartaqmola.kz',
   paths: ['/about', '/projects', '/news', '/careers', '/documents', '/contacts'],
 }
 
@@ -18,8 +18,8 @@ export const footerContent: Record<Language, FooterContent> = {
   RU: {
     description: 'Цифровые решения, развитие информационных систем и технологическая поддержка Акмолинской области.',
     linksTitle: 'Полезные ссылки', links: ['Об организации', 'Проекты', 'Новости', 'Вакансии', 'Документы', 'Контакты'],
-    contactsTitle: 'Контакты', temporary: 'Временные контактные данные',
-    addressLabel: 'Адрес', address: 'Кокшетау, адрес уточняется', phoneLabel: 'Телефон', phone: 'Номер уточняется',
+    contactsTitle: 'Контакты', temporary: '+7 (7162) 72‒13‒87',
+    addressLabel: 'Адрес', address: 'Город Кокшетау ​Улица Юрия Гагарина, 7. ​3 этаж.', phoneLabel: 'Телефон', phone: 'Номер уточняется',
     socialTitle: 'Социальные сети и сервисы', socialLabels: ['Социальные сети', 'Внешние сервисы'],
     socialNotice: 'Официальные ссылки будут добавлены позже.', rights: 'Все права защищены.',
   },
