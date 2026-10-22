@@ -22,10 +22,9 @@ const text = projectsContent[language]
         </div>
         <ul className="projects-grid">
           {realProjects.map((project) => {
-    const projectText = projectTranslations[translationLanguage][project.id]
+    const projectText = projectTranslations[translationLanguage][project.id] 
             return (
               <li className="project-card" key={project.id}>
-               
                 <div className="project-body">
                   <h3>{projectText.title}</h3>
                   <p>{projectText.description}</p>
@@ -43,6 +42,7 @@ const text = projectsContent[language]
       </div>
     </section>
   )
+
 }
 
 export default Projects

@@ -11,4 +11,4 @@ export const realProjects = [
         description: 'Интеллектуальная система управления задачами и документами с ИИ-модулем для автоматического протоколирования встреч.',
         presentationUrl: '/presentations/Planka.pdf',
     },
-]
+] as const
