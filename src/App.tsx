@@ -1,4 +1,5 @@
-﻿import AboutPage from './pages/AboutPage'
+﻿import NewPage from './pages/NewsPage'
+import AboutPage from './pages/AboutPage'
 import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
@@ -19,7 +20,7 @@ function App() {
         <Route path="/" element={<HomePage language={language} />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path='/news' element={<NewPage />} />
+        <Route path='/news' element={<NewsPage />} />
         
       </Routes>
     </Layout>
