@@ -19,6 +19,8 @@ function App() {
         <Route path="/" element={<HomePage language={language} />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path='/news' element={<NewPage />} />
+        
       </Routes>
     </Layout>
   )

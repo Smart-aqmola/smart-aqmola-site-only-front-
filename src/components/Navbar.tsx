@@ -1,4 +1,5 @@
-﻿import { useState } from 'react'
+﻿import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { content, navigationPaths, type Language } from '../content'
 
 type NavbarProps = { language: Language }
@@ -26,8 +27,8 @@ function Navbar({ language }: NavbarProps) {
           }}>
           {text.navigation.map((label, index) => (
             <li key={navigationPaths[index]}>
-              <a href={navigationPaths[index]} aria-current={index === 0 ? 'page' : undefined}
-                onClick={() => setIsOpen(false)}>{label}</a>
+              <Link to={navigationPaths[index]} aria-current={index === 0 ? 'page' : undefined}
+                onClick={() => setIsOpen(false)}>{label}</Link>
             </li>
           ))}
         </ul>
