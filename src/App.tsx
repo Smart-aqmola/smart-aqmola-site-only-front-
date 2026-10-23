@@ -1,4 +1,4 @@
-﻿import NewPage from './pages/NewsPage'
+﻿import NewsPage from './pages/NewsPage'
 import AboutPage from './pages/AboutPage'
 import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
