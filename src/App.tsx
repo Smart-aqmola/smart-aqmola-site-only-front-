@@ -1,4 +1,5 @@
-﻿import { useEffect, useState } from 'react'
+﻿import AboutPage from './pages/AboutPage'
+import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage language={language} />} />
         <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </Layout>
   )
