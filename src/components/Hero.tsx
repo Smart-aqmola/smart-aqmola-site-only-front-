@@ -22,14 +22,28 @@ const slideshowLabels = {
 function Hero({ language }: HeroProps) {
   const text = content[language]
   const [activeSlide, setActiveSlide] = useState(0)
+  const [paused, setPaused] = useState(false)
   const labels = slideshowLabels[language]
 
   useEffect(() => {
-    const interval = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % heroImages.length)
-    }, 5000)
-    return () => window.clearInterval(interval)
-  }, [activeSlide])
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)')
+    let interval: number | undefined
+    const updatePlayback = () => {
+      window.clearInterval(interval)
+      if (paused || motionPreference.matches || document.hidden) return
+      interval = window.setInterval(() => {
+        setActiveSlide((current) => (current + 1) % heroImages.length)
+      }, 5000)
+    }
+    updatePlayback()
+    motionPreference.addEventListener('change', updatePlayback)
+    document.addEventListener('visibilitychange', updatePlayback)
+    return () => {
+      window.clearInterval(interval)
+      motionPreference.removeEventListener('change', updatePlayback)
+      document.removeEventListener('visibilitychange', updatePlayback)
+    }
+  }, [activeSlide, paused])
 
   return (
     <section className="hero" aria-labelledby="hero-title">
@@ -42,11 +56,12 @@ function Hero({ language }: HeroProps) {
       <div className="hero-grid" aria-hidden="true" />
       <div className="container hero-content">
         <div className="hero-copy">
+          <p className="home-hero-label">{text.label}</p>
           <h1 id="hero-title">SMART AQMOLA<span>{language === 'RU' ? 'Цифровое будущее региона' : text.accent}</span></h1>
           <p className="hero-description">{text.description}</p>
           <div className="hero-actions">
             <Link className="button button-primary" to="/projects">{text.projects}<span aria-hidden="true">→</span></Link>
-            <a className="button button-secondary" href="/about">{text.about}</a>
+            <Link className="button button-secondary" to="/about">{text.about}</Link>
           </div>
         </div>
         <div className="region-visual" aria-hidden="true">
@@ -56,6 +71,12 @@ function Hero({ language }: HeroProps) {
       </div>
       <div className="hero-bottom-line" aria-hidden="true" />
       <div className="hero-indicators" role="group" aria-label={labels.group}>
+        <button className="home-slideshow-toggle" type="button" aria-pressed={paused}
+          onClick={() => setPaused(!paused)}>
+          {language === 'RU' ? (paused ? 'Продолжить слайд-шоу' : 'Пауза слайд-шоу')
+            : language === 'KZ' ? (paused ? 'Слайд-шоуды жалғастыру' : 'Слайд-шоуды тоқтату')
+            : (paused ? 'Resume slideshow' : 'Pause slideshow')}
+        </button>
         {heroImages.map((src, index) => (
           <button key={src} type="button" className={`hero-indicator${index === activeSlide ? ' is-active' : ''}`}
             aria-label={`${labels.slide} ${index + 1}`} aria-pressed={index === activeSlide}

@@ -6,6 +6,11 @@ import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
 import ProjectsPage from './pages/ProjectsPage'
 import type { Language } from './content'
+import AchievementsPage from './pages/AchievementsPage'
+import StructurePage from './pages/StructurePage'
+import JobPage from './pages/JobPage'
+import DocumentsPage from './pages/DocumentsPage'
+
 
 function App() {
   const [language, setLanguage] = useState<Language>('RU')
@@ -21,7 +26,10 @@ function App() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path='/news' element={<NewsPage />} />
-        
+        <Route path="/achievements" element={<AchievementsPage />} />
+        <Route path="/structure" element={<StructurePage />} />
+        <Route path='/careers' element={<JobPage/>} />
+        <Route path='/documents' element={<DocumentsPage/>} />
       </Routes>
     </Layout>
   )

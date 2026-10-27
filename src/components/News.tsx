@@ -2,6 +2,13 @@
 import type { Language } from '../content'
 import { newsContent } from '../data/news'
 import '../styles/news.css'
+import { Link } from 'react-router-dom'
+
+const loadingLabels = {
+  RU: { loading: 'Загружаем новости…', error: 'Не удалось загрузить новости. Попробуйте ещё раз.', empty: 'Новых публикаций пока нет.', retry: 'Повторить', source: 'Публикации внешнего источника · Spaceflight News API' },
+  KZ: { loading: 'Жаңалықтар жүктелуде…', error: 'Жаңалықтарды жүктеу мүмкін болмады. Қайталап көріңіз.', empty: 'Әзірге жаңа жарияланымдар жоқ.', retry: 'Қайталау', source: 'Сыртқы дереккөз жарияланымдары · Spaceflight News API' },
+  EN: { loading: 'Loading news…', error: 'Could not load news. Please try again.', empty: 'No new articles yet.', retry: 'Try again', source: 'External publications · Spaceflight News API' },
+}
 
 type Article = {
   id: number
@@ -15,6 +22,9 @@ type Article = {
 function News({ language }: { language: Language }) {
   const text = newsContent[language]
   const [articles, setArticles] = useState<Article[]>([])
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
+  const [attempt, setAttempt] = useState(0)
+  const labels = loadingLabels[language]
   const locale = { RU: 'ru-RU', KZ: 'kk-KZ', EN: 'en-GB' }[language]
 
   useEffect(() => {
@@ -26,12 +36,19 @@ function News({ language }: { language: Language }) {
         if (!response.ok) throw new Error(`News request failed: ${response.status}`)
         return response.json()
       })
-      .then((data: { results: Article[] }) => setArticles(data.results))
+      .then((data: { results: Article[] }) => {
+        if (controller.signal.aborted) return
+        setArticles(data.results)
+        setStatus('ready')
+      })
       .catch((error: unknown) => {
-        if (!controller.signal.aborted) console.error('Failed to load news:', error)
+        if (!controller.signal.aborted) {
+          console.error('Failed to load news:', error)
+          setStatus('error')
+        }
       })
     return () => controller.abort()
-  }, [])
+  }, [attempt])
 
   return (
     <section className="news" aria-labelledby="news-title">
@@ -39,7 +56,16 @@ function News({ language }: { language: Language }) {
         <div className="news-panel">
           <div className="news-heading">
             <h2 id="news-title">{text.title}</h2>
-            <a className="news-all" href="/news">{text.all} <span aria-hidden="true">→</span></a>
+            <Link className="news-all" to="/news">{text.all} <span aria-hidden="true">→</span></Link>
+          </div>
+          <p className="home-content-notice">{labels.source}</p>
+          <div role="status">
+            {status === 'loading' && <p className="home-content-notice">{labels.loading}</p>}
+            {status === 'error' && <div className="home-news-feedback">
+              <p>{labels.error}</p>
+              <button type="button" onClick={() => { setStatus('loading'); setAttempt((current) => current + 1) }}>{labels.retry}</button>
+            </div>}
+            {status === 'ready' && articles.length === 0 && <p className="home-content-notice">{labels.empty}</p>}
           </div>
           <ul className="news-list">
             {articles.map((article) => (

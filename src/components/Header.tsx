@@ -26,22 +26,11 @@ function Header({ language, onLanguageChange }: HeaderProps) {
       <div className="container header-content">
         <div className="header-identity">
           <div className="government-identity">
-            {/* Временный декоративный знак, заменить официальным гербом. */}
-            <svg className="government-mark" viewBox="0 0 60 60" aria-hidden="true">
-              <circle cx="30" cy="28" r="25" fill="#d0ae40" />
-              <circle cx="30" cy="28" r="21" fill="#368e83" stroke="#efcf65" strokeWidth="2" />
-              <circle cx="30" cy="28" r="12" fill="none" stroke="#efcf65" strokeWidth="2" />
-              <path d="M30 8v40M10 28h40M16 14l28 28M16 42l28-28M20 9l20 38M10 18l40 20M10 38l40-20M20 47 40 9" stroke="#efcf65" strokeWidth="1" />
-              <path d="m30 16 4 8 9 1-7 6 2 9-8-4-8 4 2-9-7-6 9-1Z" fill="#efcf65" />
-              <path d="M15 48h30l-3 8H18Z" fill="#c6a33c" />
-            </svg>
+            <img className="government-emblem" src="/images/akimat-emblem.jpeg" alt="Акимат Акмолинской области" />
             <div><strong>{identity[0]}</strong><span>{identity[1]}</span></div>
           </div>
-        <a className="brand" href="/" aria-label="Smart Aqmola">
-          <span className="brand-symbol" aria-hidden="true">
-            <svg viewBox="0 0 60 50"><path d="M4 33 24 5q4-5 9 0l14 15-14-8-8 2-12 15ZM2 43l23-22q5-4 11 0l20 17-19-7-11 1ZM13 47l15-10q6-4 12 0l18 12-25-5Z" /></svg>
-          </span>
-          <span className="brand-name">SMART <strong>AQMOLA</strong></span>
+        <a className="brand" href="/" aria-label="Digital Aqmola">
+          <img className="brand-image" src="/images/digital-aqmola-logo.PNG" alt="Digital Aqmola" />
         </a>
           <div className="organization-identity"><strong>{identity[2]}</strong><span>{identity[3]}<br />{identity[4]}</span></div>
         </div>

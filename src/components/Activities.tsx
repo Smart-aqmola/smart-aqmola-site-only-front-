@@ -2,6 +2,7 @@
 import type { Language } from '../content'
 import '../styles/activities.css'
 import { activitiesContent } from '../data/activities'
+import { Link } from 'react-router-dom'
 
 // Иконки расположены в том же порядке, что и направления деятельности.
 const icons: ReactNode[] = [
@@ -21,9 +22,9 @@ function Activities({ language }: { language: Language }) {
       <div className="container activities-container">
         <div className="activities-heading">
           <h2 id="activities-title" className="activities-title">{text.title}</h2>
-          <a className="activities-all" href="/activities">
+          <Link className="activities-all" to="/about">
             {text.all} <span aria-hidden="true">→</span>
-          </a>
+          </Link>
         </div>
         <ul className="activities-grid">
           {text.items.map((label, index) => (

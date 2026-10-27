@@ -2,6 +2,8 @@ import type { ReactNode } from 'react'
 import type { Language } from '../content'
 import { digitalServices, digitalServicesContent } from '../data/digitalServices'
 import '../styles/digital-services.css'
+import { Link } from 'react-router-dom'
+import { content } from '../content'
 
 const icons: Record<(typeof digitalServices)[number]['id'], ReactNode> = {
   residents: <><circle cx="16" cy="11" r="4" /><path d="M7 27v-3a9 9 0 0 1 18 0v3" /></>,
@@ -30,18 +32,15 @@ function DigitalServices({ language }: { language: Language }) {
                 </span>
                 <h3>{serviceText.title}</h3>
                 <p>{serviceText.description}</p>
-                <a className="digital-service-link" href={service.href}>
-                  {text.more}<span className="digital-service-sr-only">: {serviceText.title}</span>
-                  <span aria-hidden="true">→</span>
-                </a>
+                <p className="home-service-status">{language === 'RU' ? 'Каталог сервисов готовится' : language === 'KZ' ? 'Сервистер каталогы дайындалуда' : 'Service directory coming soon'}</p>
               </li>
             )
           })}
         </ul>
         <div className="digital-services-actions">
-          <a className="digital-services-all" href="/services">
-            {text.all} <span aria-hidden="true">→</span>
-          </a>
+          <Link className="digital-services-all" to="/projects">
+            {content[language].projects} <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </div>
     </section>

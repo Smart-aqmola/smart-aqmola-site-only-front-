@@ -1,6 +1,8 @@
 import type { Language } from '../content'
 import { events, eventsContent } from '../data/events'
 import '../styles/events.css'
+import { Link } from 'react-router-dom'
+import { content } from '../content'
 
 function Events({ language }: { language: Language }) {
   const text = eventsContent[language]
@@ -10,10 +12,11 @@ function Events({ language }: { language: Language }) {
       <div className="container events-container">
         <div className="events-heading">
           <h2 id="events-title">{text.title}</h2>
-          <a className="events-all" href="/events">
-            {text.all} <span aria-hidden="true">→</span>
-          </a>
+          <Link className="events-all" to="/news">
+            {content[language].navigation[4]} <span aria-hidden="true">→</span>
+          </Link>
         </div>
+        <p className="home-content-notice">{language === 'RU' ? 'Предварительные материалы макета. Даты и места требуют подтверждения.' : language === 'KZ' ? 'Макеттің алдын ала материалдары. Күндері мен орындары растауды қажет етеді.' : 'Draft content. Dates and venues require confirmation.'}</p>
         <ul className="events-grid">
           {events.map((event) => {
             const eventText = event.text[language]
@@ -30,10 +33,7 @@ function Events({ language }: { language: Language }) {
                     </svg>
                     <span><span className="event-sr-only">{text.location}: </span>{eventText.location}</span>
                   </p>
-                  <a className="event-details" href={event.href}>
-                    {text.details}<span className="event-sr-only">: {eventText.title}</span>
-                    <span aria-hidden="true">→</span>
-                  </a>
+                  <p className="home-content-notice">{language === 'RU' ? 'Подробности готовятся' : language === 'KZ' ? 'Толық ақпарат дайындалуда' : 'Details coming soon'}</p>
                 </article>
               </li>
             )

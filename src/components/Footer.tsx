@@ -1,6 +1,7 @@
 ﻿import type { Language } from '../content'
 import { footerContent, footerContacts } from '../data/footer'
 import '../styles/footer.css'
+import { Link } from 'react-router-dom'
 
 function Footer({ language }: { language: Language }) {
   const text = footerContent[language]
@@ -27,9 +28,13 @@ function Footer({ language }: { language: Language }) {
           </div>
           <nav aria-labelledby="footer-links-title" className="footer-links">
             <h2 id="footer-links-title">{text.linksTitle}</h2>
-            <ul>{text.links.map((label, index) => <li key={label}><a href={footerContacts.paths[index]}>{label}</a></li>)}</ul>
+            <ul>{text.links.map((label, index) => <li key={label}>
+              {footerContacts.paths[index] === '/contacts'
+                ? <a href="#home-contacts">{label}</a>
+                : <Link to={footerContacts.paths[index]}>{label}</Link>}
+            </li>)}</ul>
           </nav>
-          <div className="footer-contacts">
+          <div className="footer-contacts" id="home-contacts" tabIndex={-1}>
             <h2>{text.contactsTitle}</h2>
             <p className="footer-notice">{text.temporary}</p>
             <address><dl>
@@ -57,12 +62,12 @@ function Footer({ language }: { language: Language }) {
   <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
 </svg>)}
 {social.id === 'phone' && (
-  <svg>
+  <svg
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
     strokeWidth="1.8"
-    aria-hidden="true"
+    aria-hidden="true">
     <path d="M6.6 3.5 9 3l2 5-2.2 1.3a15.7 15.7 0 0 0 5.9 5.9L16 13l5 2-.5 2.4a3 3 0 0 1-3 2.4C10.7 19.4 4.6 13.3 4.2 6.5a3 3 0 0 1 2.4-3Z" />
   </svg>
 )}
