@@ -1,5 +1,6 @@
-﻿import type { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import Header from './Header'
+import ScrollToTopButton from './ScrollToTopButton'
 import { content, type Language } from '../content'
 
 type LayoutProps = {
@@ -16,6 +17,7 @@ function Layout({ children, language, onLanguageChange }: LayoutProps) {
       <main id="main-content" className="site-main" tabIndex={-1}>
         {children}
       </main>
+      <ScrollToTopButton />
     </div>
   )
 }

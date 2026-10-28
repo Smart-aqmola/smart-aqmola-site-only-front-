@@ -1,7 +1,9 @@
-﻿import { Link } from 'react-router-dom'
+﻿import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { content, navigationPaths, type Language } from '../content'
+import '../styles/header.css'
+import '../styles/nav-links.css'
 
 type NavbarProps = { language: Language }
 
@@ -32,8 +34,12 @@ function Navbar({ language }: NavbarProps) {
               {pathname === '/' && navigationPaths[index] === '/contacts' ? (
                 <a href="#home-contacts" onClick={() => setIsOpen(false)}>{label}</a>
               ) : (
-              <Link to={navigationPaths[index]} aria-current={index === 0 ? 'page' : undefined}
-                onClick={() => setIsOpen(false)}>{label}</Link>
+              <NavLink to={navigationPaths[index]} 
+            className= {({ isActive}) => isActive ? 'active' : ''}
+                onClick={() => setIsOpen(false)}
+                >
+                {label}
+                </NavLink>
               )}
             </li>
           ))}

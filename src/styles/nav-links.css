@@ -1,0 +1,47 @@
+/* Обычная ссылка меню. */
+.nav-list a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Цвет ссылки при наведении. */
+.nav-list a:hover {
+  color: #8edfff;
+}
+
+/* NavLink добавляет класс active для текущего маршрута. */
+.nav-list a.active {
+  color: #8edfff;
+}
+
+/* Нижняя линия активной ссылки не занимает место в раскладке. */
+.nav-list a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: #3fcbe9;
+}
+
+/* Существующие размеры ссылок для планшетов и телефонов. */
+@media (max-width: 1150px) and (min-width: 901px) {
+  .nav-list a {
+    min-height: 39px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-list a {
+    min-height: 44px;
+  }
+}
