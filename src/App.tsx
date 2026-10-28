@@ -10,6 +10,7 @@ import AchievementsPage from './pages/AchievementsPage'
 import StructurePage from './pages/StructurePage'
 import JobPage from './pages/JobPage'
 import DocumentsPage from './pages/DocumentsPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/structure" element={<StructurePage />} />
         <Route path='/careers' element={<JobPage/>} />
         <Route path='/documents' element={<DocumentsPage/>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Layout>
   )
