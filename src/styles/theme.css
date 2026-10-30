@@ -1,0 +1,167 @@
+/* Shared theme controls. Existing light-theme component styles remain intact. */
+.site-layout {
+  background-color: #f5f9fd;
+  color: #19334f;
+  color-scheme: light;
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid #d8e7f4;
+  border-radius: 50%;
+  background: #f2f7fd;
+  color: #14345b;
+  font-size: 18px;
+  line-height: 1;
+  box-shadow: 0 2px 8px #153d650a;
+  cursor: pointer;
+}
+
+.theme-toggle:hover { background: #e2effc; border-color: #87bce8; transform: translateY(-1px); }
+.theme-toggle:active { transform: scale(.94); }
+.theme-toggle:focus-visible { outline: 3px solid #1777cf; outline-offset: 3px; }
+.header-tools { min-width: 0; gap: 12px; }
+.language-switch { flex-shrink: 0; }
+@media (min-width: 901px) and (max-width: 1150px) {
+  .header-tools { gap: 8px; }
+  .site-search { width: 160px; }
+}
+@media (max-width: 380px) { .header-tools { gap: 8px; } }
+
+/* Keep theme transitions in both directions, including existing card hover effects. */
+@media (prefers-reduced-motion: no-preference) {
+  .site-layout.site-layout.site-layout,
+  .site-layout.site-layout.site-layout :where(*) {
+    transition: background-color .25s ease, color .25s ease, border-color .25s ease,
+      box-shadow .25s ease, transform .2s ease, fill .25s ease, stroke .25s ease,
+      opacity 1s ease-in-out;
+  }
+}
+
+/* Every route is rendered inside this wrapper by Layout. */
+.site-layout.dark {
+  --theme-bg: #0e1828;
+  --theme-section: #111e30;
+  --theme-card: #192a40;
+  --theme-raised: #213850;
+  --theme-border: #30465e;
+  --theme-text: #edf4fc;
+  --theme-muted: #b0c2d6;
+  --theme-accent: #80caff;
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+  color-scheme: dark;
+}
+
+.site-layout.dark .home-page {
+  --home-ink: var(--theme-text);
+  --home-muted: var(--theme-muted);
+  --home-border: var(--theme-border);
+  background: var(--theme-bg);
+}
+
+.site-layout.dark :is(.site-main, .about-page, .projects-page, .structure-page, .not-found-page) {
+  background: var(--theme-bg);
+  color: var(--theme-text);
+}
+.site-layout.dark :is(.activities, .news, .events, .vacancies) {
+  background: var(--theme-section);
+  border-color: var(--theme-border);
+}
+.site-layout.dark :is(.projects, .achievements) {
+  background: var(--theme-bg);
+  border-color: var(--theme-border);
+}
+.site-layout.dark :is(.site-header, .search-results, .skip-link) {
+  background: var(--theme-section);
+  color: var(--theme-text);
+  border-color: var(--theme-border);
+}
+.site-layout.dark .navbar { background: #142d49; }
+.site-layout.dark .nav-list a { color: #edf4fc; }
+.site-layout.dark .nav-list a:is(:hover, .active) { color: #8edfff; }
+.site-layout.dark :is(.government-identity, .organization-identity) { border-color: var(--theme-border); }
+.site-layout.dark :is(.government-identity strong, .government-identity span, .organization-identity, .brand-name) { color: var(--theme-text); }
+.site-layout.dark .brand-image { filter: brightness(0) saturate(100%) invert(89%) sepia(16%) saturate(755%) hue-rotate(172deg); }
+.site-layout.dark .government-emblem { border-radius: 12px; }
+.site-layout.dark .search-icon { stroke: var(--theme-muted); }
+.site-layout.dark .site-search input {
+  background: var(--theme-card);
+  border-color: var(--theme-border);
+  color: var(--theme-text);
+}
+.site-layout.dark .site-search input::placeholder { color: var(--theme-muted); }
+.site-layout.dark .language-switch button { color: var(--theme-muted); }
+.site-layout.dark .language-switch button:is(:hover, [aria-pressed='true']) { color: var(--theme-accent); }
+
+.site-layout.dark :is(.activity-card, .project-card, .achievement-card, .event-card, .vacancy-card,
+  .about-page-card, .structure-page-card, .home-news-feedback, .news-ecosystem,
+  .projects-page-card, .about-page-header, .structure-page-header) {
+  background: var(--theme-card);
+  border-color: var(--theme-border);
+  color: var(--theme-text);
+  box-shadow: 0 8px 28px #00000018;
+}
+.site-layout.dark :is(.projects-page-card, .about-page-header, .structure-page-header, .news-ecosystem) {
+  background: linear-gradient(125deg, var(--theme-card), #17374c);
+}
+.site-layout.dark :is(h1, h2, h3, h4, h5, h6, .activity-title) { color: var(--theme-text); }
+.site-layout.dark :is(.about-page-header p, .about-page-card p, .projects-page > p, .projects-page-card p,
+  .structure-page-intro, .structure-page-notice, .structure-page-card-label, .structure-page-card p,
+  .project-body p, .news-body p, .news-body time, .news-ecosystem-caption p,
+  .achievement-label, .event-description, .event-location, .vacancies-intro, .vacancy-description,
+  .home-news-feedback, .not-found-page p) { color: var(--theme-muted); }
+
+.site-layout.dark :is(.site-main > section > a:not(.not-found-button), .projects-all, .activities-all,
+  .news-all, .news-details, .achievements-all, .events-all, .vacancies-all, .structure-page-back,
+  .structure-page-eyebrow, .event-details, .vacancy-details, .news-body a,
+  .site-main > .container a, .search-results a) { color: var(--theme-accent); }
+.site-layout.dark :is(.activities-all, .projects-all, .news-all, .achievements-all, .events-all,
+  .home-project-filters button, .home-news-feedback button, .theme-toggle) {
+  background: var(--theme-card);
+  color: var(--theme-accent);
+  border-color: var(--theme-border);
+}
+.site-layout.dark :is(.activity-icon, .event-date, .vacancy-direction, .home-project-category, .structure-page-status) {
+  background: #203f59;
+  color: #9bdcff;
+  border-color: var(--theme-border);
+}
+.site-layout.dark :is(.event-details, .vacancy-details, .news-list > li + li) { border-color: var(--theme-border); }
+.site-layout.dark .achievement-value { color: var(--theme-accent); }
+.site-layout.dark .news-network-nodes circle { fill: var(--theme-accent); }
+.site-layout.dark .news-network-nodes .news-network-hub { fill: #bde9ff; }
+.site-layout.dark .news-network-lines { stroke: #72b9e8; }
+.site-layout.dark .news-image { background: var(--theme-card); }
+.site-layout.dark .digital-services { background: radial-gradient(ellipse at top right, #16739733, transparent 60%), #102a40; }
+.site-layout.dark .digital-service-card { background: #192f46; border-color: var(--theme-border); }
+.site-layout.dark .site-footer { background: #0b1523; border-color: var(--theme-border); }
+.site-layout.dark .scroll-to-top { border-color: #547997; }
+.site-layout.dark :focus-visible { outline-color: var(--theme-accent); }
+
+.site-layout.dark :is(.home-project-filters button[aria-pressed='true'], .projects-page-card a,
+  .home-page .project-details, .not-found-button) {
+  background: #126bb2;
+  border-color: #368ed0;
+  color: #fff;
+}
+@media (hover: hover) {
+  .site-layout.dark :is(.activity-card, .project-card, .achievement-card, .event-card, .vacancy-card, .projects-page-card):hover {
+    border-color: #5483a7;
+    box-shadow: 0 12px 32px #00000030;
+  }
+  .site-layout.dark :is(.theme-toggle, .search-results a, .activities-all, .projects-all, .news-all,
+    .achievements-all, .events-all, .event-details, .vacancy-details, .home-news-feedback button,
+    .home-project-filters button:not([aria-pressed='true'])):hover {
+    background: var(--theme-raised);
+    border-color: #5483a7;
+    color: #bde9ff;
+  }
+  .site-layout.dark :is(.projects-page-card a, .home-page .project-details, .not-found-button):hover { background: #185d94; }
+}
+@media (prefers-reduced-motion: reduce) { .theme-toggle { transition: none; } }

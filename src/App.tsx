@@ -8,9 +8,10 @@ import ProjectsPage from './pages/ProjectsPage'
 import type { Language } from './content'
 import AchievementsPage from './pages/AchievementsPage'
 import StructurePage from './pages/StructurePage'
-import JobPage from './pages/JobPage'
 import DocumentsPage from './pages/DocumentsPage'
 import NotFoundPage from './pages/NotFoundPage'
+import ContactsPage from './pages/ContactsPage'
+
 
 
 function App() {
@@ -29,8 +30,8 @@ function App() {
         <Route path='/news' element={<NewsPage />} />
         <Route path="/achievements" element={<AchievementsPage />} />
         <Route path="/structure" element={<StructurePage />} />
-        <Route path='/careers' element={<JobPage/>} />
         <Route path='/documents' element={<DocumentsPage/>} />
+        <Route path="/contacts" element={<ContactsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Layout>

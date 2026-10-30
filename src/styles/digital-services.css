@@ -126,7 +126,7 @@
   .digital-service-card, .digital-services-all { transition: none; }
   .digital-service-card:hover { transform: none; }
 }
-@kayfremes pulse {
+@keyframes pulse {
   0% , 100%{
   opacity: 0.5;
   transform: scale(1);

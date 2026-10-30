@@ -6,12 +6,19 @@ import '../styles/header.css'
 type HeaderProps = {
   language: Language
   onLanguageChange: (language: Language) => void
+  darkMode: boolean
+  onThemeToggle: () => void
 }
 
-function Header({ language, onLanguageChange }: HeaderProps) {
+function Header({ language, onLanguageChange, darkMode, onThemeToggle }: HeaderProps) {
   const [query, setQuery] = useState('')
   const [searchOpen, setSearchOpen] = useState(false)
   const text = content[language]
+  const themeLabel = {
+    RU: darkMode ? 'Включить светлую тему' : 'Включить тёмную тему',
+    KZ: darkMode ? 'Ашық тақырыпты қосу' : 'Қараңғы тақырыпты қосу',
+    EN: darkMode ? 'Switch to light theme' : 'Switch to dark theme',
+  }[language]
   const identity = {
     RU: ['РЕСПУБЛИКА КАЗАХСТАН', 'Акимат Акмолинской области', 'КГУ «Smart Aqmola»', 'Управление цифровизации', 'и архивов Акмолинской области'],
     KZ: ['ҚАЗАҚСТАН РЕСПУБЛИКАСЫ', 'Ақмола облысының әкімдігі', '«Smart Aqmola» КММ', 'Ақмола облысының цифрландыру', 'және архивтер басқармасы'],
@@ -43,6 +50,10 @@ function Header({ language, onLanguageChange }: HeaderProps) {
               </button>
             ))}
           </div>
+          <button className="theme-toggle" type="button" onClick={onThemeToggle}
+            aria-label={themeLabel} title={themeLabel} aria-pressed={darkMode}>
+            <span aria-hidden="true">{darkMode ? '☀️' : '🌙'}</span>
+          </button>
           <div className="site-search" role="search"
             onBlur={(event) => {
               if (!event.currentTarget.contains(event.relatedTarget)) setSearchOpen(false)

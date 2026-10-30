@@ -1,10 +1,10 @@
 ﻿export type Language = 'KZ' | 'RU' | 'EN'
 
-export const navigationPaths = ['/', '/about', '/structure', '/projects', '/news', '/achievements', '/careers', '/documents', '/contacts']
+export const navigationPaths = ['/', '/about', '/structure', '/projects', '/news', '/achievements', '/documents', '/contacts']
 
 export const content = {
   RU: {
-    navigation: ['Главная', 'Об организации', 'Структура', 'Проекты', 'Новости и мероприятия', 'Достижения', 'Вакансии', 'Документы', 'Контакты'],
+    navigation: ['Главная', 'Об организации', 'Структура', 'Проекты', 'Новости и мероприятия', 'Достижения', 'Документы', 'Контакты'],
     search: 'Поиск по сайту...', searchLabel: 'Поиск разделов сайта', empty: 'Разделы не найдены',
     menu: 'Меню', close: 'Закрыть меню', language: 'Язык сайта',
     label: 'Технологии для развития региона',
