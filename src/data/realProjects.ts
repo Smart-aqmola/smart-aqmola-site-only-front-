@@ -7,7 +7,7 @@ export const realProjects = [
     },
     {
         id: 2,
-        title: 'Planlka',
+        title: 'Planka',
         description: 'Интеллектуальная система управления задачами и документами с ИИ-модулем для автоматического протоколирования встреч.',
         presentationUrl: '/presentations/Planka.pdf',
     },

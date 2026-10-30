@@ -11,7 +11,7 @@ const departments = [
 function StructurePage() {
   return (
     <section className="structure-page" aria-labelledby="structure-title">
-      <Link className="structure-page-back" to="/">← Главная</Link>
+      <Link className="structure-page-back page-back-link" to="/">← Главная</Link>
 
       <header className="structure-page-header">
         <p className="structure-page-eyebrow">Smart Aqmola</p>

@@ -3,6 +3,7 @@ import Header from './Header'
 import ScrollToTopButton from './ScrollToTopButton'
 import { content, type Language } from '../content'
 
+
 type LayoutProps = {
   children: ReactNode
   language: Language
@@ -33,6 +34,7 @@ function Layout({ children, language, onLanguageChange }: LayoutProps) {
       >
         {children}
       </main>
+     
 
       <ScrollToTopButton />
 

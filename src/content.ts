@@ -13,7 +13,7 @@ export const content = {
     projects: 'Наши проекты', about: 'Об организации', region: 'Акмолинская область', network: 'Цифровая экосистема', skip: 'Перейти к содержимому',
   },
   KZ: {
-    navigation: ['Басты бет', 'Ұйым туралы', 'Құрылым', 'Жобалар', 'Жаңалықтар мен іс-шаралар', 'Жетістіктер', 'Бос жұмыс орындары', 'Құжаттар', 'Байланыс'],
+    navigation: ['Басты бет', 'Ұйым туралы', 'Құрылым', 'Жобалар', 'Жаңалықтар мен іс-шаралар', 'Жетістіктер', 'Құжаттар', 'Байланыс'],
     search: 'Сайттан іздеу...', searchLabel: 'Сайт бөлімдерін іздеу', empty: 'Бөлімдер табылмады',
     menu: 'Мәзір', close: 'Мәзірді жабу', language: 'Сайт тілі',
     label: 'Өңірді дамытуға арналған технологиялар',
@@ -22,7 +22,7 @@ export const content = {
     projects: 'Біздің жобалар', about: 'Ұйым туралы', region: 'Ақмола облысы', network: 'Цифрлық экожүйе', skip: 'Мазмұнға өту',
   },
   EN: {
-    navigation: ['Home', 'About us', 'Structure', 'Projects', 'News and events', 'Achievements', 'Careers', 'Documents', 'Contacts'],
+    navigation: ['Home', 'About us', 'Structure', 'Projects', 'News and events', 'Achievements', 'Documents', 'Contacts'],
     search: 'Search the site...', searchLabel: 'Search site sections', empty: 'No sections found',
     menu: 'Menu', close: 'Close menu', language: 'Site language',
     label: 'Technology for regional development',

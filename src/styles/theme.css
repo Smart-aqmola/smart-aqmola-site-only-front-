@@ -1,37 +1,42 @@
 /* Shared theme controls. Existing light-theme component styles remain intact. */
 .site-layout {
+  --project-decoration-ink: #1777cf;
   background-color: #f5f9fd;
   color: #19334f;
   color-scheme: light;
 }
 
 .theme-toggle {
-  display: grid;
-  place-items: center;
-  flex: 0 0 38px;
-  width: 38px;
-  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
   padding: 0;
-  border: 1px solid #d8e7f4;
-  border-radius: 50%;
-  background: #f2f7fd;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   color: #14345b;
   font-size: 18px;
   line-height: 1;
-  box-shadow: 0 2px 8px #153d650a;
+  box-shadow: none;
   cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
 }
 
-.theme-toggle:hover { background: #e2effc; border-color: #87bce8; transform: translateY(-1px); }
+.theme-toggle svg { flex: 0 0 20px; width: 20px; height: 20px; }
+.theme-toggle:hover { color: #0877ce; }
+.theme-toggle:hover svg { transform: scale(1.08); }
 .theme-toggle:active { transform: scale(.94); }
 .theme-toggle:focus-visible { outline: 3px solid #1777cf; outline-offset: 3px; }
 .header-tools { min-width: 0; gap: 12px; }
 .language-switch { flex-shrink: 0; }
 @media (min-width: 901px) and (max-width: 1150px) {
-  .header-tools { gap: 8px; }
+  .header-tools { gap: 10px; }
   .site-search { width: 160px; }
 }
-@media (max-width: 380px) { .header-tools { gap: 8px; } }
+@media (max-width: 380px) { .header-tools { gap: 10px; } }
 
 /* Keep theme transitions in both directions, including existing card hover effects. */
 @media (prefers-reduced-motion: no-preference) {
@@ -45,6 +50,7 @@
 
 /* Every route is rendered inside this wrapper by Layout. */
 .site-layout.dark {
+  --project-decoration-ink: #80caff;
   --theme-bg: #0e1828;
   --theme-section: #111e30;
   --theme-card: #192a40;
@@ -85,7 +91,6 @@
 .site-layout.dark .navbar { background: #142d49; }
 .site-layout.dark .nav-list a { color: #edf4fc; }
 .site-layout.dark .nav-list a:is(:hover, .active) { color: #8edfff; }
-.site-layout.dark :is(.government-identity, .organization-identity) { border-color: var(--theme-border); }
 .site-layout.dark :is(.government-identity strong, .government-identity span, .organization-identity, .brand-name) { color: var(--theme-text); }
 .site-layout.dark .brand-image { filter: brightness(0) saturate(100%) invert(89%) sepia(16%) saturate(755%) hue-rotate(172deg); }
 .site-layout.dark .government-emblem { border-radius: 12px; }
@@ -96,8 +101,12 @@
   color: var(--theme-text);
 }
 .site-layout.dark .site-search input::placeholder { color: var(--theme-muted); }
-.site-layout.dark .language-switch button { color: var(--theme-muted); }
-.site-layout.dark .language-switch button:is(:hover, [aria-pressed='true']) { color: var(--theme-accent); }
+.site-layout.dark :is(.language-trigger, .theme-toggle) { color: var(--theme-text); }
+.site-layout.dark .language-trigger:is(:hover, [aria-expanded='true']),
+.site-layout.dark .theme-toggle:hover { color: var(--theme-accent); }
+.site-layout.dark .language-dropdown { background: var(--theme-card); border-color: var(--theme-border); box-shadow: 0 10px 28px #00000030; }
+.site-layout.dark .language-option { color: var(--theme-text); }
+.site-layout.dark .language-option:is(:hover, [aria-pressed='true']) { background: var(--theme-raised); color: var(--theme-accent); }
 
 .site-layout.dark :is(.activity-card, .project-card, .achievement-card, .event-card, .vacancy-card,
   .about-page-card, .structure-page-card, .home-news-feedback, .news-ecosystem,
@@ -122,7 +131,7 @@
   .structure-page-eyebrow, .event-details, .vacancy-details, .news-body a,
   .site-main > .container a, .search-results a) { color: var(--theme-accent); }
 .site-layout.dark :is(.activities-all, .projects-all, .news-all, .achievements-all, .events-all,
-  .home-project-filters button, .home-news-feedback button, .theme-toggle) {
+  .home-project-filters button, .home-news-feedback button) {
   background: var(--theme-card);
   color: var(--theme-accent);
   border-color: var(--theme-border);
@@ -155,7 +164,7 @@
     border-color: #5483a7;
     box-shadow: 0 12px 32px #00000030;
   }
-  .site-layout.dark :is(.theme-toggle, .search-results a, .activities-all, .projects-all, .news-all,
+  .site-layout.dark :is(.search-results a, .activities-all, .projects-all, .news-all,
     .achievements-all, .events-all, .event-details, .vacancy-details, .home-news-feedback button,
     .home-project-filters button:not([aria-pressed='true'])):hover {
     background: var(--theme-raised);

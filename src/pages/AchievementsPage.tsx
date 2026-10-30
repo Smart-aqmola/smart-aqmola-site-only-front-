@@ -5,7 +5,7 @@ function AchievementsPage ()
     return (
         
  <section>
-        <Link to = '/'>←Главная </Link>
+        <Link className="page-back-link" to = '/'>←Главная </Link>
         <h1>das</h1>
 </section>
     )    

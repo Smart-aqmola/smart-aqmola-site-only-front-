@@ -41,13 +41,41 @@
   line-height: 1.7;
 }
 
+.projects-page-carousel {
+  position: relative;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  margin-top: clamp(28px, 4vw, 44px);
+  padding-block: 8px 24px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.projects-page-carousel::-webkit-scrollbar { display: none; }
+.projects-page-carousel:focus-visible { outline: 3px solid #1684c9; outline-offset: 4px; border-radius: 24px; }
+.projects-page-slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
 .projects-page-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
   gap: 24px;
-  margin-top: clamp(28px, 4vw, 44px);
 }
+
+.projects-page-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.projects-page-dot { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #0877ce; cursor: pointer; }
+.projects-page-dot span { width: 9px; height: 9px; border-radius: 50%; background: #c6d4e2; }
+.projects-page-dot[aria-pressed='true'] span { background: currentColor; transform: scale(1.25); }
+.projects-page-dot:hover { background: #0877ce12; }
+.projects-page-dot:hover span { background: currentColor; }
+.projects-page-dot:focus-visible { outline: 2px solid currentColor; outline-offset: 1px; }
+.site-layout.dark .projects-page-dot { color: var(--theme-accent); }
+.site-layout.dark .projects-page-dot span { background: #60768d; }
+.site-layout.dark .projects-page-dot[aria-pressed='true'] span,
+.site-layout.dark .projects-page-dot:hover span { background: currentColor; }
+.site-layout.dark .projects-page-dot:hover { background: #80caff14; }
 
 .projects-page-card {
   display: flex;
@@ -94,6 +122,24 @@
   font-size: clamp(23px, 2.8vw, 32px);
   line-height: 1.3;
   letter-spacing: -.025em;
+}
+
+.projects-page-card h2::before {
+  content: 'SMART' / '';
+  position: absolute;
+  z-index: -1;
+  right: -12px;
+  bottom: 10px;
+  color: var(--project-decoration-ink);
+  font-size: clamp(64px, 8vw, 110px);
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -.06em;
+  white-space: nowrap;
+  opacity: .055;
+  transform: rotate(-8deg);
+  pointer-events: none;
+  user-select: none;
 }
 
 .projects-page-card p {
@@ -158,6 +204,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .projects-page-carousel { scroll-behavior: auto; }
   .projects-page > a, .projects-page-card, .projects-page-card a { transition: none; }
   .projects-page-card:hover, .projects-page-card a:hover { transform: none; }
 }

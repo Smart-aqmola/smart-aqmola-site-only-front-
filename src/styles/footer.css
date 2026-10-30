@@ -17,8 +17,9 @@
 .footer-contacts dd { margin: 0; color: #d1e3f2; }
 .footer-social ul { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
 .footer-social li { display: flex; align-items: center; gap: 10px; color: #d1e3f2; font-size: 14px; line-height: 1.5; }
-.footer-social a { display: inline-flex; align-items: center; gap: 12px; box-sizing: border-box; height: 48px; max-width: 100%; padding: 5px 12px; border: 1px solid #ffffff30; border-radius: 8px; background: #ffffff09; color: #d1e3f2; text-decoration: none; transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease; }
-.footer-social a:hover { background-color: #ffffff14; border-color: #8de0ff80; color: #8de0ff; }
+.footer-social a { display: inline-flex; align-items: center; gap: 12px; box-sizing: border-box; min-height: 48px; max-width: 100%; padding: 5px 0; border: 0; border-radius: 8px; background: transparent; color: #d1e3f2; text-decoration: none; transition: color 200ms ease; }
+.footer-social a:hover { color: #8de0ff; }
+.footer-social a:focus-visible { outline: 2px solid #8de0ff; outline-offset: 4px; }
 .footer-social svg { flex: 0 0 36px; width: 36px; height: 36px; padding: 7px; border: 1px solid #ffffff30; border-radius: 8px; background: #ffffff09; color: #8de0ff; }
 .footer-bottom { padding-block: 20px; border-top: 1px solid #ffffff24; color: #afc7dd; font-size: 13px; line-height: 1.6; }
 

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function AboutPage() {
   return (
   <section className="about-page" aria-labelledby="about-title">
-      <Link to='/'>←Главная</Link>
+      <Link className="page-back-link" to='/'>←Главная</Link>
       <header className="about-page-header">
         <h1 id="about-title">Об организации</h1>
         <p>Добро пожаловать в Digital Aqmola!</p>

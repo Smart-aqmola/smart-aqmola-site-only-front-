@@ -106,7 +106,65 @@
 .home-page .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .home-page .project-card { position: relative; background: linear-gradient(125deg, #fff 45%, #ecf7ff); }
 .home-page .project-card::before { content: ''; height: 4px; background: linear-gradient(90deg, #1689d4, #5bcce8); }
-.home-page .project-body { padding: clamp(24px, 3vw, 36px); }
+.home-page .project-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, transparent, #198fff 30%, #8de9ff 65%, transparent);
+  box-shadow: 0 0 5px #27b8ff30;
+  pointer-events: none;
+  animation: project-line-travel 4.5s linear infinite;
+}
+.home-page .project-card:nth-child(2n)::after { animation-delay: -1.7s; }
+.home-page .project-card:nth-child(3n)::after { animation-delay: -3.1s; }
+@keyframes project-line-travel {
+  0% { transform: translateX(-100%); opacity: 0; }
+  12% { opacity: .85; }
+  85% { opacity: .85; }
+  100% { transform: translateX(500%); opacity: 0; }
+}
+@media (hover: hover) {
+  .home-page .project-card:hover::after {
+    filter: brightness(1.15);
+    box-shadow: 0 0 7px #27b8ff45;
+  }
+}
+.home-page .project-body { position: relative; isolation: isolate; padding: clamp(24px, 3vw, 36px); }
+.home-page .project-body::before {
+  content: 'SMART' / '';
+  position: absolute;
+  z-index: -1;
+  right: -12px;
+  bottom: 10px;
+  color: var(--project-decoration-ink);
+  font-size: clamp(64px, 8vw, 110px);
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -.06em;
+  white-space: nowrap;
+  opacity: .055;
+  transform: rotate(-8deg);
+  pointer-events: none;
+  user-select: none;
+}
+.home-page .project-body::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -90px;
+  right: -100px;
+  width: 260px;
+  height: 260px;
+  border: 1px solid var(--project-decoration-ink);
+  border-radius: 50%;
+  box-shadow: 0 0 0 34px #1777cf08, 0 0 0 68px #1777cf04;
+  opacity: .12;
+  pointer-events: none;
+}
 .home-project-category { align-self: flex-start; margin-bottom: 24px; padding: 6px 12px; border: 1px solid #d8e7f4; border-radius: 20px; background: #ecf7ff; color: #17609a; font-size: 12px; font-weight: 600; }
 .home-page .project-body h3 { margin-bottom: 16px; color: var(--home-ink); font-size: clamp(23px, 2.5vw, 30px); line-height: 1.3; letter-spacing: -.025em; }
 .home-page .project-body p { margin-bottom: 28px; color: var(--home-muted); font-size: 16px; line-height: 1.8; }
