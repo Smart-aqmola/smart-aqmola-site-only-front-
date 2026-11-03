@@ -10,14 +10,14 @@ type FooterContent = {
 // Демонстрационный email не является рабочим, телефон и адрес пока не предоставлены.
 export const footerContacts = {
   email: 'smartaqmola.kz',
-  paths: ['/about', '/projects', '/news', '/careers', '/documents', '/contacts'],
+  paths: ['/about', '/projects', '/news', '/documents', '/contacts'],
 }
 
 // Официальные URL социальных сетей не предоставлены: используются локальные SVG без ссылок.
 export const footerContent: Record<Language, FooterContent> = {
   RU: {
     description: 'Цифровые решения, развитие информационных систем и технологическая поддержка Акмолинской области.',
-    linksTitle: 'Полезные ссылки', links: ['Об организации', 'Проекты', 'Новости', 'Вакансии', 'Документы', 'Контакты'],
+    linksTitle: 'Полезные ссылки', links: ['Об организации', 'Проекты', 'Новости', 'Документы', 'Контакты'],
     contactsTitle: 'Контакты', temporary: '+7 (7162) 72‒13‒87',
     addressLabel: 'Адрес', address: 'Город Кокшетау ​Улица Юрия Гагарина, 7. ​3 этаж.', phoneLabel: 'Телефон', phone: 'Номер уточняется',
     socialTitle: 'Социальные сети и сервисы', socialLabels: ['Социальные сети', 'Внешние сервисы'],
@@ -25,7 +25,7 @@ export const footerContent: Record<Language, FooterContent> = {
   },
   KZ: {
     description: 'Ақмола облысына арналған цифрлық шешімдер, ақпараттық жүйелерді дамыту және технологиялық қолдау.',
-    linksTitle: 'Пайдалы сілтемелер', links: ['Ұйым туралы', 'Жобалар', 'Жаңалықтар', 'Бос жұмыс орындары', 'Құжаттар', 'Байланыс'],
+    linksTitle: 'Пайдалы сілтемелер', links: ['Ұйым туралы', 'Жобалар', 'Жаңалықтар', 'Құжаттар', 'Байланыс'],
     contactsTitle: 'Байланыс', temporary: 'Уақытша байланыс деректері',
     addressLabel: 'Мекенжай', address: 'Көкшетау, мекенжай нақтыланады', phoneLabel: 'Телефон', phone: 'Нөмір нақтыланады',
     socialTitle: 'Әлеуметтік желілер мен сервистер', socialLabels: ['Әлеуметтік желілер', 'Сыртқы сервистер'],
@@ -33,7 +33,7 @@ export const footerContent: Record<Language, FooterContent> = {
   },
   EN: {
     description: 'Digital solutions, information systems development and technology support for the Aqmola region.',
-    linksTitle: 'Useful links', links: ['About us', 'Projects', 'News', 'Careers', 'Documents', 'Contacts'],
+    linksTitle: 'Useful links', links: ['About us', 'Projects', 'News', 'Documents', 'Contacts'],
     contactsTitle: 'Contacts', temporary: 'Temporary contact details',
     addressLabel: 'Address', address: 'Kokshetau, address to be confirmed', phoneLabel: 'Phone', phone: 'Number to be confirmed',
     socialTitle: 'Social networks and services', socialLabels: ['Social networks', 'External services'],

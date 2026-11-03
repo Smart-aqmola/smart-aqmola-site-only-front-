@@ -6,7 +6,6 @@ import News from '../components/News'
 import Achievements from '../components/Achievements'
 import Events from '../components/Events'
 import DigitalServices from '../components/DigitalServices'
-import Footer from '../components/Footer'
 import { useEffect, useRef } from 'react'
 import '../styles/home-page.css'
 
@@ -40,7 +39,6 @@ function HomePage({ language }: { language: Language }) {
       <div className="home-section"><Achievements language={language} /></div>
       <div className="home-section"><Events language={language} /></div>
       <div className="home-section"><DigitalServices language={language} /></div>
-      <Footer language={language} />
     </div>
   )
 }

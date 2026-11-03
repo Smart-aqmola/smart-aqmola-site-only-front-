@@ -1,4 +1,6 @@
-﻿.projects-page {
+.projects-page {
+  position: relative;
+  isolation: isolate;
   max-width: 1200px;
   min-height: 65vh;
   margin: 0 auto;

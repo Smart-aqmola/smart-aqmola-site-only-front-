@@ -1,5 +1,6 @@
 ﻿import { useState, type ReactNode } from 'react'
 import Header from './Header'
+import Footer from './Footer'
 import ScrollToTopButton from './ScrollToTopButton'
 import { content, type Language } from '../content'
 
@@ -34,6 +35,7 @@ function Layout({ children, language, onLanguageChange }: LayoutProps) {
       >
         {children}
       </main>
+      <Footer language={language} />
      
 
       <ScrollToTopButton />

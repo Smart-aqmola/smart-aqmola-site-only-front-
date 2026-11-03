@@ -1,6 +1,111 @@
-﻿.site-layout { min-height: 100vh; overflow-wrap: anywhere; }
+.site-layout { min-height: 100vh; overflow-wrap: anywhere; }
+.site-layout { display: flex; flex-direction: column; min-height: 100dvh; }
+.site-layout > .site-main { flex: 1 0 auto; min-width: 0; }
+.site-layout > :is(.site-header, .site-footer) { flex-shrink: 0; }
+
+/* One animated waves layer shared by home and every internal route. */
+.site-layout > .site-main {
+  --waves-wash: #f5f9fd8c;
+  --waves-edge: #f5f9fd;
+  --waves-footer: #0c2543;
+  --waves-duration: 30s;
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background: var(--waves-edge);
+}
+
+.site-layout > .site-main::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--waves-wash), var(--waves-wash)),
+    url('/images/backgrounds/waves-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  transform-origin: center;
+  animation: smart-aqmola-waves-drift var(--waves-duration) ease-in-out infinite;
+}
+
+.site-layout > .site-main::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 64px;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(transparent, var(--waves-footer));
+}
+
+/* Only route surfaces are transparent. Nested cards keep their own backgrounds. */
+.site-layout > .site-main > section {
+  background: transparent;
+}
+
+.site-layout.dark > .site-main {
+  --waves-wash: #0e1828e6;
+  --waves-edge: var(--theme-bg);
+  --waves-footer: #0b1523;
+}
+
+/* Keep the home section rhythm and opaque cards above the shared waves layer.
+   Hero and digital services retain their original images and backgrounds. */
+.site-layout > .site-main > .home-page {
+  --home-waves-section: #f5f9fd66;
+  --home-waves-raised: #ffffff99;
+  background: transparent;
+}
+
+.site-layout.dark > .site-main > .home-page {
+  --home-waves-section: #111e3066;
+  --home-waves-raised: #0e182866;
+}
+
+.site-layout > .site-main > .home-page > .home-section > :is(.activities, .news, .events) {
+  background: var(--home-waves-section);
+}
+
+.site-layout > .site-main > .home-page > .home-section > :is(.projects, .achievements) {
+  background: var(--home-waves-raised);
+}
+
+@keyframes smart-aqmola-waves-drift {
+  0%, 100% { transform: translate3d(-6px, -4px, 0) scale(1.02); }
+  50% { transform: translate3d(6px, 4px, 0) scale(1.025); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-layout > .site-main::before {
+    animation: none;
+    transform: none;
+  }
+}
 .container { width: 100%; max-width: 1320px; margin-inline: auto; padding-inline: 40px; }
 .skip-link { position: absolute; z-index: 100; top: 12px; left: 16px; padding: 12px; background: #fff; transform: translateY(-200%); }
 .skip-link:focus { transform: translateY(0); }
 .site-main .page-back-link { display: inline-flex; margin-bottom: 24px; }
 @media (max-width: 600px) { .container { padding-inline: 20px; } }
+
+/* Achievement photos: size only, without changing the page layout or theme. */
+.site-main img:is([src='/images/achievements/ai-onir-team.jpg'], [src='/images/achievements/ai-onir-trophy.jpg']) {
+  width: 100%;
+  max-width: 560px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.site-main img[src='/images/achievements/ai-onir-trophy.jpg'] {
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .site-main img:is([src='/images/achievements/ai-onir-team.jpg'], [src='/images/achievements/ai-onir-trophy.jpg']) {
+    height: 240px;
+  }
+}
