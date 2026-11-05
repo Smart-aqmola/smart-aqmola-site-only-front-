@@ -1,26 +1,12 @@
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import type { Language } from '../content'
 
 import '../styles/weather.css'
 
 
-// Города и их координаты
-const cities = [
-  {
-    name: 'Кокшетау',
-    latitude: 53.28,
-    longitude: 69.38,
-  },
-  {
-    name: 'Степногорск',
-    latitude: 52.35,
-    longitude: 71.89,
-  },
-  {
-    name: 'Бурабай',
-    latitude: 53.08,
-    longitude: 70.31,
-  },
-]
+// Fixed location: Kokshetau, Kazakhstan. No geolocation is used.
+const weatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=53.28&longitude=69.38&current=temperature_2m,weather_code&temperature_unit=celsius'
+const refreshInterval = 15 * 60 * 1000
 
 
 // Определяем тип погоды по weather_code
@@ -52,15 +38,19 @@ function getWeatherType(code: number | null) {
 }
 
 
-// Названия погоды
-const weatherLabels = {
-  sunny: 'Ясно',
-  'partly-cloudy': 'Переменная облачность',
-  cloudy: 'Облачно или туман',
-  rainy: 'Дождь',
-  snowy: 'Снег',
-  stormy: 'Гроза',
-  unknown: 'Данные о погоде уточняются',
+const weatherText = {
+  RU: {
+    city: 'Кокшетау', location: 'Кокшетау, Казахстан', label: 'Погода: Кокшетау, Казахстан', loading: 'Загрузка...', error: 'Погода недоступна',
+    conditions: { sunny: 'Ясно', 'partly-cloudy': 'Переменная облачность', cloudy: 'Облачно или туман', rainy: 'Дождь', snowy: 'Снег', stormy: 'Гроза', unknown: 'Данные о погоде уточняются' },
+  },
+  KZ: {
+    city: 'Көкшетау', location: 'Көкшетау, Қазақстан', label: 'Ауа райы: Көкшетау, Қазақстан', loading: 'Жүктелуде...', error: 'Ауа райы қолжетімсіз',
+    conditions: { sunny: 'Ашық', 'partly-cloudy': 'Ауыспалы бұлтты', cloudy: 'Бұлтты немесе тұман', rainy: 'Жаңбыр', snowy: 'Қар', stormy: 'Найзағай', unknown: 'Ауа райы деректері нақтылануда' },
+  },
+  EN: {
+    city: 'Kokshetau', location: 'Kokshetau, Kazakhstan', label: 'Weather: Kokshetau, Kazakhstan', loading: 'Loading...', error: 'Weather unavailable',
+    conditions: { sunny: 'Clear', 'partly-cloudy': 'Partly cloudy', cloudy: 'Cloudy or foggy', rainy: 'Rain', snowy: 'Snow', stormy: 'Thunderstorm', unknown: 'Weather data pending' },
+  },
 }
 
 
@@ -147,123 +137,54 @@ function WeatherIcon({
 }
 
 
-function Weather() {
-  const [isCityOpen, setIsCityOpen] = useState(false)
-  const cityButtonRef = useRef<HTMLButtonElement>(null)
-  const cityOptionsId = useId()
-
-  // Выбранный город
-  const [selectedCity, setSelectedCity] =
-    useState(cities[0])
-
-  // Температура
-  const [temperatura, setTemperatura] =
-    useState<number | null>(null)
-
-  // Код погоды от API
-  const [weatherCode, setWeatherCode] =
-    useState<number | null>(null)
-
+function Weather({ language }: { language: Language }) {
+  const [temperatura, setTemperatura] = useState<number | null>(null)
+  const [weatherCode, setWeatherCode] = useState<number | null>(null)
+  const [hasError, setHasError] = useState(false)
+  const text = weatherText[language]
   const weatherType = getWeatherType(weatherCode)
 
-  const weatherLabel = weatherLabels[weatherType]
-
-
-  // Получаем погоду при изменении города
   useEffect(() => {
-    setTemperatura(null)
-
-    fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${selectedCity.latitude}&longitude=${selectedCity.longitude}&current=temperature_2m,weather_code`
-    )
-      .then((response) => response.json())
-
-      .then((data) => {
+    const controller = new AbortController()
+    const loadWeather = async () => {
+      try {
+        const response = await fetch(weatherUrl, { signal: controller.signal, cache: 'no-store' })
+        if (!response.ok) throw new Error('Weather request failed')
+        const data = await response.json()
+        if (!Number.isFinite(data.current?.temperature_2m) || !Number.isFinite(data.current?.weather_code)) {
+          throw new Error('Invalid weather data')
+        }
+        if (controller.signal.aborted) return
         setTemperatura(data.current.temperature_2m)
-        setWeatherCode(
-          data.current.weather_code ?? null
-        )
-      })
-  }, [selectedCity])
-
+        setWeatherCode(data.current.weather_code)
+        setHasError(false)
+      } catch {
+        if (controller.signal.aborted) return
+        setTemperatura(null)
+        setWeatherCode(null)
+        setHasError(true)
+      }
+    }
+    void loadWeather()
+    const interval = window.setInterval(() => { void loadWeather() }, refreshInterval)
+    return () => {
+      controller.abort()
+      window.clearInterval(interval)
+    }
+  }, [])
 
   return (
     <div className="weather-widget">
-      <section
-        className="weather-card"
-        aria-label={`Погода в ${selectedCity.name}`}
-      >
-        <WeatherIcon
-          weatherType={weatherType}
-          weatherLabel={weatherLabel}
-        />
-
+      <section className="weather-card" aria-label={text.label}>
+        <WeatherIcon weatherType={weatherType} weatherLabel={text.conditions[weatherType]} />
         <div className="weather-content">
-          <div
-            className="weather-city-switch"
-            onBlur={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget)) setIsCityOpen(false)
-            }}
-            onKeyDown={(event) => {
-              if (event.key === 'Escape') {
-                setIsCityOpen(false)
-                cityButtonRef.current?.focus()
-              }
-            }}
-          >
-            <button
-              className="weather-city-trigger"
-              ref={cityButtonRef}
-              type="button"
-              aria-label={`Выбор города: ${selectedCity.name}`}
-              aria-expanded={isCityOpen}
-              aria-controls={cityOptionsId}
-              onClick={() => setIsCityOpen((open) => !open)}
-            >
-              {selectedCity.name}
-              <span className="weather-city-chevron" aria-hidden="true">▾</span>
-            </button>
-            {isCityOpen === true && (
-              <ul className="weather-city-dropdown" id={cityOptionsId} aria-label="Выбор города">
-                {cities.map((city) => (
-                  <li key={city.name}>
-                    <button
-                      className="weather-city-option"
-                      type="button"
-                      aria-pressed={selectedCity.name === city.name}
-                      onClick={() => {
-                        setSelectedCity(city)
-                        setIsCityOpen(false)
-                        cityButtonRef.current?.focus()
-                      }}
-                    >
-                      {city.name}
-                      <span aria-hidden="true">{selectedCity.name === city.name ? '✓' : ''}</span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-
-          <div
-            className="weather-reading"
-            role="status"
-            aria-live="polite"
-            aria-atomic="true"
-          >
+          <span className="weather-city-name" title={text.location}>{text.city}</span>
+          <div className="weather-reading" role="status" aria-live="polite" aria-atomic="true">
             {temperatura === null ? (
-              <p className="weather-loading">
-                Загрузка...
-              </p>
+              <p className="weather-loading">{hasError ? text.error : text.loading}</p>
             ) : (
               <p className="weather-temperature">
-                {temperatura}
-
-                <span className="weather-unit">
-                  {' '}
-                  °C
-                </span>
+                {temperatura}<span className="weather-unit">{' '}°C</span>
               </p>
             )}
           </div>

@@ -1,15 +1,14 @@
+import PageHero from '../components/PageHero'
+import { PageHeroIcon, PageHeroIllustration } from '../components/PageHeroArtwork'
+import { getPageHeroText } from '../data/pageHeroes'
+import type { Language } from '../content'
 
 import '../styles/about-page.css'
-import { Link } from 'react-router-dom'
 
-function AboutPage() {
+function AboutPage({ language }: { language: Language }) {
   return (
-  <section className="about-page" aria-labelledby="about-title">
-      <Link className="page-back-link" to='/'>←Главная</Link>
-      <header className="about-page-header">
-        <h1 id="about-title">Об организации</h1>
-        <p>Добро пожаловать в Digital Aqmola!</p>
-      </header>
+  <section className="about-page internal-page" aria-labelledby="about-title">
+      <PageHero {...getPageHeroText('about', language)} language={language} headingId="about-title" icon={<PageHeroIcon kind="about" />} illustration={<PageHeroIllustration kind="about" />} />
       <div className="about-page-grid">
         <section className="about-page-card" aria-labelledby="about-who-title">
           <h2 id="about-who-title">Кто мы</h2>

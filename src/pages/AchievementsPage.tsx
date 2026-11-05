@@ -1,3 +1,10 @@
+import PageHero from '../components/PageHero'
+import { PageHeroIcon, PageHeroIllustration } from '../components/PageHeroArtwork'
+import { getPageHeroText } from '../data/pageHeroes'
+import type { Language } from '../content'
+import AchievementSections, { AwardFacts } from '../components/AchievementSections'
+import AchievementTrophyVideo from '../components/AchievementTrophyVideo'
+import AchievementsTimeline from '../components/AchievementsTimeline'
 
 import { useState } from "react"
 import { Link } from "react-router-dom"
@@ -14,8 +21,10 @@ const massiv = [
   },
 ]
 
-function AchievementsPage() {
+function AchievementsPage({ language }: { language: Language }) {
   const [selectedCategory, setSelectedCategory] = useState("Все")
+  // Сохраняем setter для будущего возвращения фильтров без ошибки noUnusedLocals.
+  void setSelectedCategory
 
   const [openedImage, setOpenedImage] = useState<string | null>(null)
 
@@ -26,29 +35,8 @@ function AchievementsPage() {
   )
 
   return (
-    <section>
-      <Link className="page-back-link" to="/">
-        ← Главная
-      </Link>
-
-      <h1>Наши достижения</h1>
-      <p className="achievements-page-intro">
-        Признание цифровых проектов и инновационных решений Акмолинской области.
-      </p>
-
-      <button
-        type="button"
-        onClick={() => setSelectedCategory("Все")}
-      >
-        Все
-      </button>
-
-      <button
-        type="button"
-        onClick={() => setSelectedCategory("AI Өңір")}
-      >
-        AI Өңір
-      </button>
+    <section className="achievements-page internal-page" aria-labelledby="achievements-page-title">
+      <PageHero {...getPageHeroText('achievements', language)} language={language} headingId="achievements-page-title" icon={<PageHeroIcon kind="achievements" />} illustration={<PageHeroIllustration kind="achievements" />} />
 
       {filteredCards.map((card) => (
         <article key={card.id}>
@@ -67,8 +55,15 @@ function AchievementsPage() {
               width="300"
             />
           </button>
+          <AwardFacts language={language} />
         </article>
       ))}
+
+      <AchievementTrophyVideo language={language} />
+
+      <AchievementsTimeline language={language} />
+
+      <AchievementSections language={language} />
 
       <aside className="achievements-projects" aria-labelledby="achievements-projects-title">
         <div className="achievements-projects-copy">

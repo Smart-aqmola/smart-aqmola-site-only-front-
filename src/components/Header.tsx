@@ -76,7 +76,7 @@ function Header({ language, onLanguageChange, darkMode, onThemeToggle }: HeaderP
           <div className="organization-identity"><strong>{identity[2]}</strong><span>{identity[3]}<br />{identity[4]}</span></div>
         </div>
         <div className="header-tools">
-          <Weatherdd />
+          <Weatherdd language={language} />
           <div className="language-switch" ref={languageRef}
             onBlur={(event) => {
               if (!event.currentTarget.contains(event.relatedTarget)) setLanguageOpen(false)

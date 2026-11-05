@@ -25,14 +25,14 @@ function App() {
     <Layout language={language} onLanguageChange={setLanguage}>
       <Routes>
         <Route path="/" element={<HomePage language={language} />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path='/news' element={<NewsPage />} />
-        <Route path="/achievements" element={<AchievementsPage />} />
-        <Route path="/structure" element={<StructurePage />} />
-        <Route path='/documents' element={<DocumentsPage/>} />
-        <Route path="/contacts" element={<ContactsPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/projects" element={<ProjectsPage language={language} />} />
+        <Route path="/about" element={<AboutPage language={language} />} />
+        <Route path='/news' element={<NewsPage language={language} />} />
+        <Route path="/achievements" element={<AchievementsPage language={language} />} />
+        <Route path="/structure" element={<StructurePage language={language} />} />
+        <Route path='/documents' element={<DocumentsPage language={language} />} />
+        <Route path="/contacts" element={<ContactsPage language={language} />} />
+        <Route path="*" element={<NotFoundPage language={language} />} />
       </Routes>
     </Layout>
   )

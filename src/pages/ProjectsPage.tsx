@@ -1,4 +1,7 @@
-﻿import { Link } from 'react-router-dom'
+import PageHero from '../components/PageHero'
+import { PageHeroIcon, PageHeroIllustration } from '../components/PageHeroArtwork'
+import { getPageHeroText } from '../data/pageHeroes'
+import type { Language } from '../content'
 import '../styles/projects-page.css'
 import { useEffect, useRef, useState } from 'react'
 
@@ -19,7 +22,7 @@ const projectsData = [
   },
 ]
 
-function ProjectsPage() {
+function ProjectsPage({ language }: { language: Language }) {
   const carouselRef = useRef<HTMLDivElement>(null)
   const [activeSlide, setActiveSlide] = useState(0)
   const [cardsPerSlide, setCardsPerSlide] = useState(() =>
@@ -52,14 +55,8 @@ function ProjectsPage() {
   }
 
   return (
-    <section className="projects-page">
-      <Link className="page-back-link" to="/">← Главная</Link>
-
-      <h1>Наши проекты</h1>
-
-      <p>
-        Цифровые решения и информационные системы Smart Aqmola.
-      </p>
+    <section className="projects-page internal-page" aria-labelledby="projects-title">
+      <PageHero {...getPageHeroText('projects', language)} language={language} headingId="projects-title" icon={<PageHeroIcon kind="projects" />} illustration={<PageHeroIllustration kind="projects" />} />
 
       <div className="projects-page-carousel" id="projects-carousel" ref={carouselRef}
         role="region" aria-roledescription="карусель" aria-label="Проекты" tabIndex={0}

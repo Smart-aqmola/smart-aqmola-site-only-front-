@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom'
-function NewsPage() {
+import PageHero from '../components/PageHero'
+import { PageHeroIcon, PageHeroIllustration } from '../components/PageHeroArtwork'
+import { getPageHeroText } from '../data/pageHeroes'
+import type { Language } from '../content'
+function NewsPage({ language }: { language: Language }) {
   return (
-    <section className="NewsPage">
-      <Link className="page-back-link" to = "/">← Главная</Link>
-      <h1>Новости и мероприятия</h1>
+    <section className="NewsPage internal-page" aria-labelledby="news-page-title">
+      <PageHero {...getPageHeroText('news', language)} language={language} headingId="news-page-title" icon={<PageHeroIcon kind="news" />} illustration={<PageHeroIllustration kind="news" />} />
     </section>
   )
 }

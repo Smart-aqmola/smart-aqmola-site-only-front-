@@ -1,0 +1,44 @@
+.achievements-timeline-list { position: relative; isolation: isolate; display: grid; gap: 20px; margin: 28px 0 0; padding: 0; list-style: none; }
+.achievements-timeline-list::before { content: ''; position: absolute; z-index: -1; top: 24px; bottom: 24px; left: calc(50% - 1px); width: 2px; border-radius: 2px; background: linear-gradient(#77c9f5, #0877ce 50%, #5bcce8); }
+.achievements-timeline-item { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr); align-items: start; gap: 20px; min-width: 0; }
+.achievements-timeline-marker { grid-column: 2; grid-row: 1; display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid var(--achievement-border); border-radius: 50%; background: var(--achievement-tint); color: var(--achievement-accent); box-shadow: 0 0 0 5px var(--achievement-surface); }
+.achievements-timeline-marker svg { width: 25px; height: 25px; }
+.achievements-timeline-card { position: relative; grid-column: 1; grid-row: 1; min-width: 0; border: 1px solid var(--achievement-border); border-radius: 20px; background: var(--achievement-surface); box-shadow: 0 8px 28px #153d6508; }
+.achievements-timeline-card::before { content: ''; position: absolute; top: 23px; right: -21px; width: 20px; height: 2px; background: var(--achievement-border); }
+.achievements-timeline-item:nth-child(even) .achievements-timeline-card { grid-column: 3; }
+.achievements-timeline-item:nth-child(even) .achievements-timeline-card::before { right: auto; left: -21px; }
+.achievements-timeline-card summary { position: relative; display: block; padding: 24px 50px 22px 24px; border-radius: inherit; cursor: pointer; list-style: none; }
+.achievements-timeline-card summary::-webkit-details-marker { display: none; }
+.achievements-timeline-card time { display: block; margin-bottom: 10px; color: var(--achievement-accent); font-size: 13px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.achievements-page .achievements-timeline-card h3 { margin: 0; color: var(--achievement-ink); font-size: clamp(18px, 2vw, 21px); line-height: 1.45; }
+.achievements-timeline-chevron { position: absolute; top: 24px; right: 20px; width: 18px; height: 18px; color: var(--achievement-accent); }
+.achievements-timeline-card[open] .achievements-timeline-chevron { transform: rotate(180deg); }
+.achievements-page .achievements-timeline-card p { margin: 0; padding: 0 24px 24px; color: var(--achievement-muted); font-size: 15px; line-height: 1.8; }
+.site-layout.dark .achievements-timeline-card { box-shadow: 0 8px 28px #00000018; }
+@media (hover: hover) {
+  .achievements-timeline-card:hover { border-color: var(--achievement-accent); box-shadow: 0 10px 28px #0877ce14; }
+}
+@media (max-width: 760px) {
+  .achievements-timeline-list { gap: 18px; }
+  .achievements-timeline-list::before { left: 19px; }
+  .achievements-timeline-item { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; }
+  .achievements-timeline-marker { grid-column: 1; width: 40px; height: 40px; }
+  .achievements-timeline-marker svg { width: 22px; height: 22px; }
+  .achievements-timeline-card, .achievements-timeline-item:nth-child(even) .achievements-timeline-card { grid-column: 2; }
+  .achievements-timeline-card::before, .achievements-timeline-item:nth-child(even) .achievements-timeline-card::before { left: -15px; right: auto; top: 19px; width: 14px; }
+  .achievements-timeline-card summary { padding: 20px 38px 18px 18px; }
+  .achievements-timeline-chevron { top: 21px; right: 14px; }
+  .achievements-page .achievements-timeline-card p { padding: 0 18px 20px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .achievements-timeline-card { transition: border-color .2s ease, box-shadow .2s ease; }
+  .achievements-timeline-chevron { transition: transform .2s ease; }
+  .achievements-timeline-item.timeline-entered .achievements-timeline-card { animation: achievements-timeline-appear .45s ease-out both; }
+}
+@keyframes achievements-timeline-appear {
+  from { opacity: .45; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-layout .achievements-timeline :is(.achievements-timeline-card, .achievements-timeline-chevron) { animation: none; transition: none; }
+}
