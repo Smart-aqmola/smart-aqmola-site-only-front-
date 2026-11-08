@@ -29,7 +29,7 @@ function News({ language }: { language: Language }) {
 
   useEffect(() => {
     const controller = new AbortController()
-    fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=3&ordering=-published_at', {
+    fetch('api/news', {
       signal: controller.signal,
     })
       .then((response) => {
