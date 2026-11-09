@@ -175,14 +175,6 @@
 .home-page .event-card > .home-content-notice { margin: auto 0 0; font-size: 13px; }
 .home-news-feedback { padding: 24px; border: 1px solid var(--home-border); border-radius: 16px; background: #fff; color: var(--home-muted); font-size: 15px; line-height: 1.7; }
 .home-news-feedback button { margin-top: 16px; }
-.home-page .news .news-container { grid-template-columns: 1.5fr 1fr; gap: 32px; }
-.home-page .news-ecosystem { align-self: start; background: linear-gradient(140deg, #fff, #e8f5ff); border-color: var(--home-border); }
-.home-page .news-item { gap: 20px; padding-block: 24px; }
-.home-page .news-image { border-radius: 12px; }
-.home-page .news-body h3 { font-size: 17px; line-height: 1.5; margin-bottom: 8px; }
-.home-page .news-body p { font-size: 14px; line-height: 1.7; color: var(--home-muted); }
-.home-page .news-body time { font-size: 12px; margin-bottom: 8px; color: var(--home-muted); }
-.home-page .news-details { align-self: flex-start; min-height: 44px; font-size: 14px; }
 .home-page .achievement-card { padding: 32px 24px; background: #f5f9fd; }
 .home-page .achievement-label { color: var(--home-muted); }
 .home-page .event-card { padding: 28px; }
@@ -210,8 +202,6 @@
 
 @media (max-width: 1000px) {
   .home-page .hero-content { gap: 24px; min-height: 440px; }
-  .home-page .news .news-container { grid-template-columns: 1fr; }
-  .home-page .news-ecosystem { display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
 }
 @media (max-width: 800px) {
   .home-page .hero-content { grid-template-columns: 1fr; }
@@ -233,10 +223,6 @@
   .home-page .activities-grid { gap: 12px; }
   .home-page .activity-card { padding: 18px; min-height: 170px; }
   .home-page .activity-title { font-size: 14px; }
-  .home-page .news-ecosystem { display: flex; }
-  .home-page .news-item { grid-template-columns: 1fr; }
-  .home-page .news-image { max-height: 220px; }
-  .home-page .news-body h3 { font-size: 18px; }
   .home-page .project-details { width: 100%; justify-content: center; }
   .home-page .digital-service-card, .home-page .event-card { padding: 24px; }
   .home-page .achievement-card { padding: 24px 16px; }

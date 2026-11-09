@@ -1,13 +1,37 @@
-﻿import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Language } from '../content'
 import { newsContent } from '../data/news'
 import '../styles/news.css'
 import { Link } from 'react-router-dom'
 
 const loadingLabels = {
-  RU: { loading: 'Загружаем новости…', error: 'Не удалось загрузить новости. Попробуйте ещё раз.', empty: 'Новых публикаций пока нет.', retry: 'Повторить', source: 'Публикации внешнего источника · Spaceflight News API' },
-  KZ: { loading: 'Жаңалықтар жүктелуде…', error: 'Жаңалықтарды жүктеу мүмкін болмады. Қайталап көріңіз.', empty: 'Әзірге жаңа жарияланымдар жоқ.', retry: 'Қайталау', source: 'Сыртқы дереккөз жарияланымдары · Spaceflight News API' },
-  EN: { loading: 'Loading news…', error: 'Could not load news. Please try again.', empty: 'No new articles yet.', retry: 'Try again', source: 'External publications · Spaceflight News API' },
+  RU: {
+    loading: 'Загружаем новости…',
+    error: 'Не удалось загрузить новости. Попробуйте ещё раз.',
+    empty: 'Новых публикаций пока нет.',
+    retry: 'Повторить',
+    source: 'Источник: gov.kz · Digital Aqmola',
+    openSource: 'Перейти к источнику',
+    close: 'Закрыть новость',
+  },
+  KZ: {
+    loading: 'Жаңалықтар жүктелуде…',
+    error: 'Жаңалықтарды жүктеу мүмкін болмады. Қайталап көріңіз.',
+    empty: 'Әзірге жаңа жарияланымдар жоқ.',
+    retry: 'Қайталау',
+    source: 'Дереккөз: gov.kz · Digital Aqmola',
+    openSource: 'Дереккөзге өту',
+    close: 'Жаңалықты жабу',
+  },
+  EN: {
+    loading: 'Loading news…',
+    error: 'Could not load news. Please try again.',
+    empty: 'No new articles yet.',
+    retry: 'Try again',
+    source: 'Source: gov.kz · Digital Aqmola',
+    openSource: 'View original article',
+    close: 'Close article',
+  },
 }
 
 type Article = {
@@ -19,17 +43,53 @@ type Article = {
   url: string
 }
 
-function News({ language }: { language: Language }) {
+type NewsProps = {
+  language: Language
+  limit?: number
+  showAllLink?: boolean
+}
+
+function News({ language, limit, showAllLink = true }: NewsProps) {
   const text = newsContent[language]
   const [articles, setArticles] = useState<Article[]>([])
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
   const [attempt, setAttempt] = useState(0)
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const backdropPressed = useRef(false)
   const labels = loadingLabels[language]
   const locale = { RU: 'ru-RU', KZ: 'kk-KZ', EN: 'en-GB' }[language]
+  // API returns the latest news first; keep that order when limiting the list.
+  const visibleArticles = limit === undefined ? articles : articles.slice(0, limit)
+  const midpoint = Math.ceil(visibleArticles.length / 2)
+  const columns = [visibleArticles.slice(0, midpoint), visibleArticles.slice(midpoint)]
+
+  function openArticle(article: Article, card: HTMLElement) {
+    // Focus the real button before opening so closing returns to this card.
+    card.querySelector<HTMLButtonElement>('.news-open')?.focus({ preventScroll: true })
+    setSelectedArticle(article)
+  }
+
+  useEffect(() => {
+    if (!selectedArticle || !dialogRef.current) return
+
+    const trigger = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    const previousOverflow = document.body.style.overflow
+    dialogRef.current.showModal()
+    closeButtonRef.current?.focus()
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      // Restore keyboard focus when the dialog is removed or the route changes.
+      if (trigger?.isConnected) trigger.focus({ preventScroll: true })
+    }
+  }, [selectedArticle])
 
   useEffect(() => {
     const controller = new AbortController()
-    fetch('api/news', {
+    fetch('/api/news', {
       signal: controller.signal,
     })
       .then((response) => {
@@ -56,7 +116,7 @@ function News({ language }: { language: Language }) {
         <div className="news-panel">
           <div className="news-heading">
             <h2 id="news-title">{text.title}</h2>
-            <Link className="news-all" to="/news">{text.all} <span aria-hidden="true">→</span></Link>
+            {showAllLink && <Link className="news-all" to="/news">{text.all} <span aria-hidden="true">→</span></Link>}
           </div>
           <p className="home-content-notice">{labels.source}</p>
           <div role="status">
@@ -67,52 +127,67 @@ function News({ language }: { language: Language }) {
             </div>}
             {status === 'ready' && articles.length === 0 && <p className="home-content-notice">{labels.empty}</p>}
           </div>
-          <ul className="news-list">
-            {articles.map((article) => (
-              <li key={article.id}>
-                <article className="news-item" aria-labelledby={`news-${article.id}`}>
-                  {article.image_url ? (
-                    <img className="news-image" src={article.image_url} alt="" width="360" height="220" loading="lazy" />
-                  ) : (
-                    <div className="news-image" aria-hidden="true" />
-                  )}
-                  <div className="news-body">
-                    <time dateTime={article.published_at}>
-                      {new Date(article.published_at).toLocaleDateString(locale)}
-                    </time>
-                    <h3 id={`news-${article.id}`}>{article.title}</h3>
-                    <p>{article.summary}</p>
-                    <a className="news-details" href={article.url} target="_blank" rel="noopener noreferrer">
-                      {text.details}<span className="news-sr-only">: {article.title}</span> <span aria-hidden="true">→</span>
-                    </a>
-                  </div>
-                </article>
-              </li>
+          <div className="news-columns">
+            {columns.map((column, index) => column.length > 0 && (
+              <ul className="news-list" key={index}>
+                {column.map((article) => (
+                  <li key={article.id}>
+                    <article className="news-item" aria-labelledby={`news-${article.id}`} onClick={(event) => openArticle(article, event.currentTarget)}>
+                      {article.image_url ? (
+                        <img className="news-image" src={article.image_url} alt="" width="360" height="220" loading="lazy" />
+                      ) : (
+                        <div className="news-image" aria-hidden="true" />
+                      )}
+                      <div className="news-body">
+                        <time dateTime={article.published_at}>
+                          {new Date(article.published_at).toLocaleDateString(locale)}
+                        </time>
+                        <h3 id={`news-${article.id}`}>{article.title}</h3>
+                        {article.summary && <p>{article.summary}</p>}
+                        <button className="news-details news-open" type="button" aria-haspopup="dialog">
+                          {text.details}<span className="news-sr-only">: {article.title}</span> <span aria-hidden="true">→</span>
+                        </button>
+                      </div>
+                    </article>
+                  </li>
+                ))}
+              </ul>
             ))}
-          </ul>
-        </div>
-        <aside className="news-ecosystem" aria-labelledby="news-ecosystem-title">
-          <svg className="news-network" viewBox="0 0 560 300" fill="none" aria-hidden="true" focusable="false">
-            <g className="news-network-lines">
-              <path d="M65 150 155 65 280 145 405 60 495 150 405 240 280 145 155 240 65 150Z" />
-              <path d="M155 65 155 240M405 60 405 240M65 150 280 145 495 150M155 65 405 60M155 240 405 240" />
-            </g>
-            <g className="news-network-nodes">
-              <circle cx="65" cy="150" r="5" />
-              <circle cx="155" cy="65" r="7" />
-              <circle cx="405" cy="60" r="5" />
-              <circle cx="495" cy="150" r="7" />
-              <circle cx="405" cy="240" r="6" />
-              <circle cx="155" cy="240" r="5" />
-              <circle className="news-network-hub" cx="280" cy="145" r="13" />
-            </g>
-          </svg>
-          <div className="news-ecosystem-caption">
-            <h3 id="news-ecosystem-title">Smart Aqmola</h3>
-            <p>{language === 'RU' ? 'Цифровая экосистема региона' : language === 'KZ' ? 'Өңірдің цифрлық экожүйесі' : 'The region’s digital ecosystem'}</p>
           </div>
-        </aside>
+        </div>
       </div>
+      {selectedArticle && (
+        <dialog
+          className="news-dialog"
+          ref={dialogRef}
+          aria-labelledby="news-dialog-title"
+          aria-modal="true"
+          onClose={() => { backdropPressed.current = false; setSelectedArticle(null) }}
+          onPointerDown={(event) => {
+            const rect = event.currentTarget.getBoundingClientRect()
+            backdropPressed.current = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom
+          }}
+          onClick={(event) => {
+            const rect = event.currentTarget.getBoundingClientRect()
+            const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom
+            if (backdropPressed.current && outside) event.currentTarget.close()
+            backdropPressed.current = false
+          }}
+        >
+          <button className="news-dialog-close" type="button" ref={closeButtonRef} aria-label={labels.close} onClick={() => dialogRef.current?.close()}>
+            <span aria-hidden="true">×</span>
+          </button>
+          {selectedArticle.image_url && <img className="news-dialog-image" src={selectedArticle.image_url} alt="" />}
+          <div className="news-dialog-body">
+            <time dateTime={selectedArticle.published_at}>{new Date(selectedArticle.published_at).toLocaleDateString(locale)}</time>
+            <h2 id="news-dialog-title">{selectedArticle.title}</h2>
+            {selectedArticle.summary && <p>{selectedArticle.summary}</p>}
+            <a className="news-dialog-source" href={selectedArticle.url} target="_blank" rel="noopener noreferrer">
+              {labels.openSource} <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </dialog>
+      )}
     </section>
   )
 }

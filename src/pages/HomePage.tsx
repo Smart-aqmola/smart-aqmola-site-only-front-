@@ -35,7 +35,7 @@ function HomePage({ language }: { language: Language }) {
       <Hero language={language} />
       <div className="home-section"><Activities language={language} /></div>
       <div className="home-section"><Projects language={language} /></div>
-      <div className="home-section"><News language={language} /></div>
+      <div className="home-section"><News language={language} limit={6} /></div>
       <div className="home-section"><Achievements language={language} /></div>
       <div className="home-section"><Events language={language} /></div>
       <div className="home-section"><DigitalServices language={language} /></div>
